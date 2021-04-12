@@ -17,7 +17,8 @@ package simplyRugby;
 import java.util.ArrayList;
 
 public class Player extends Member{
-	
+	//Initialises and Sets the VersionID for serialisation, This ensures that when Data is saved, it's saved in the same way.
+	private static final long serialVersionUID = 541583651513199852L;
 	//Declares scrumsID variable that is used to store the players scrums identification number.
 	private String scrumsID;
 	//Declares position variable that is used to store the position that the player plays in. 
@@ -28,6 +29,45 @@ public class Player extends Member{
 	private String emergencyContactNo;
 	//Declares playerSkills variable that is used to store a list of skill categories. 
 	private ArrayList<SkillCategory> playerSkills;
+	
+	/**
+	 * Constructors
+	 * Constructor for the Player child class of super class Member.
+	 * 1st Constructor sets all variables within the Constructor to their default values.
+	 * 2nd Constructor sets all variables within the Constructor to the values passed in via arguments.
+	 */
+	
+	public Player()
+	{
+		//Sets the value of scrumsID to null.
+		scrumsID = null;
+		//Sets the value of position to null.
+		position = null;
+		//Sets the value of emergencyContactName to null.
+		emergencyContactName = null;
+		//Sets the value of emergencyContactNo to null.
+		emergencyContactNo = null;
+		//Sets the value of playerSkills to null.
+		playerSkills = null;
+	}
+	
+	public Player(String memberID, String firstName, String middleNames, String lastName, String email, String phoneNo, String address1,
+			String address2, String city, String postcode, String scrumsID, String position, String emergencyContactName,
+			String emergencyContactNo, ArrayList<SkillCategory> playerSkills)
+	{
+		//The Super keyword is used to access the data of the parent class, in this case, Member. These values are also passed in as Parameters, then set.
+		super(memberID, firstName, middleNames, lastName, email, phoneNo, address1, address2, city, postcode);
+		//Sets the scrumsID variable within the Class to the value in the passed in parameter.
+		this.scrumsID = scrumsID;
+		//Sets the position variable within the Class to the value in the passed in parameter.
+		this.position = position;
+		//Sets the emergencyContactName variable within the Class to the value in the passed in parameter.
+		this.emergencyContactName = emergencyContactName;
+		//Sets the emergencyContactNo variable within the Class to the value in the passed in parameter.
+		this.emergencyContactNo = emergencyContactNo;
+		//Sets the playerSkills variable within the Class to the value in the passed in parameter.
+		this.playerSkills = playerSkills;
+	}
 	
 	/**
 	 * @return the scrumsID

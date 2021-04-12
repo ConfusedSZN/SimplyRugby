@@ -1,5 +1,7 @@
 package simplyRugby;
 
+import BCrypt.*;
+
 public class Controller {
 
 	private Model simplyRugbyModel;
@@ -29,6 +31,8 @@ public class Controller {
 	
 	public void authenticateUser()
 	{
+		
+		
 		
 	}
 	

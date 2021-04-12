@@ -10,8 +10,9 @@ package simplyRugby;
  * 
  */
 
-public class Member {
-
+public class Member implements java.io.Serializable{
+	//Initialises and Sets the VersionID for serialisation, This ensures that when Data is saved, it's saved in the same way.
+	private static final long serialVersionUID = 541583651513199852L;
 	//Declares memberID variable that is used as an identifier for the member.
 	private String memberID;
 	//Declares firstName variable that is used to store the members first name. 
@@ -32,6 +33,62 @@ public class Member {
 	private String city;
 	//Declares postcode variable that is used to store the postcode of the member.
 	private String postcode;
+	
+	/**
+	 * Constructors
+	 * Constructor for the Member super class.
+	 * 1st Constructor sets all variables within the Constructor to their default values.
+	 * 2nd Constructor sets all variables within the Constructor to the values passed in via arguments.
+	 */
+	
+	public Member()
+	{
+		//Sets the value of memberID to null.
+		memberID = null;
+		//Sets the value of firstName to null.
+		firstName = null;
+		//Sets the value of middleNames to null.
+		middleNames = null;
+		//Sets the value of lastName to null.
+		lastName = null;
+		//Sets the value of email to null.
+		email = null;
+		//Sets the value of phoneNo to null.
+		phoneNo = null;
+		//Sets the value of address1 to null.
+		address1 = null;
+		//Sets the value of address2 to null.
+		address2 = null;
+		//Sets the value of city to null.
+		city = null;
+		//Sets the value of postcode to null.
+		postcode = null;
+	}
+	
+	public Member(String memberID, String firstName, String middleNames, String lastName, String email, String phoneNo, String address1,
+			String address2, String city, String postcode)
+	{
+		//Sets the memberID variable within the Class to the value in the passed in parameter.
+		this.memberID = memberID;
+		//Sets the firstName variable within the Class to the value in the passed in parameter.
+		this.firstName = firstName;
+		//Sets the middleNames variable within the Class to the value in the passed in parameter.
+		this.middleNames = middleNames;
+		//Sets the lastName variable within the Class to the value in the passed in parameter.
+		this.lastName = lastName;
+		//Sets the email variable within the Class to the value in the passed in parameter.
+		this.email = email;
+		//Sets the phoneNo variable within the Class to the value in the passed in parameter.
+		this.phoneNo = phoneNo;
+		//Sets the address1 variable within the Class to the value in the passed in parameter.
+		this.address1 = address1;
+		//Sets the address2 variable within the Class to the value in the passed in parameter.
+		this.address2 = address2;
+		//Sets the city variable within the Class to the value in the passed in parameter.
+		this.city = city;
+		//Sets the postcode variable within the Class to the value in the passed in parameter.
+		this.postcode = postcode;
+	}
 	
 	/**
 	 * @return the memberID
