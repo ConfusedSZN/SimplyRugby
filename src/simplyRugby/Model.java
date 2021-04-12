@@ -20,7 +20,7 @@ public class Model {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadData(){
+	protected void loadData(){
 		//Opens a Try block, this allows for easy error catching
 		 try {
 			//Starts a new FIS(File Input Stream) for the file "SimplyRugbyData.ser".
@@ -73,10 +73,10 @@ public class Model {
 		/**
 		 * Data Prepopulation for Coach.
 		 */
+		System.out.println("We doing the ting");
 		coachData.add(new Coach("6SH6A521", "Kris", "Crawford","Forbes","krisforbes@simplyrugby.com", "07751259892", "57", "Boat Lane", "Reedham", "NR13 5WE", "Kris", "123", "H26YZA99"));
 		coachData.add(new Coach("4B3NR2SK", "Tristan", "McIntosh","Ritchie","tristanritchie@simplyrugby.com", "07043645025", "78", "Farburn Terrace", "Reedham", "NR13 8WZ", "Tristan", "123", ""));
 		coachData.add(new Coach("B0P2BJR6", "Angus", "MacDonald","Stevenson","angusstevenson@simplyrugby.com", "07774612118", "89", "Osborne Road", "Reedham", "NR13 4GH", "Angus", "123", "8ABTY625"));
-		
 		saveData();
 	}
 
@@ -95,7 +95,6 @@ public class Model {
 	public void setCoachData(ArrayList<Coach> coachData) {
 		this.coachData = coachData;
 	}
-
 
 	/**
 	 * @return the squadData

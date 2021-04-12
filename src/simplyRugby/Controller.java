@@ -25,6 +25,7 @@ public class Controller {
 			SplashScreen.splashProgressBar.setValue(i);
 			SplashScreen.splashProgressBar.setStringPainted(true);
 		}
+		simplyRugbyModel.loadData();
 		splashScreen.setVisible(false);
 		loginScreen.setVisible(true);
 	}
