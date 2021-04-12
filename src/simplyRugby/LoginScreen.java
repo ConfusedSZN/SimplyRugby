@@ -1,25 +1,34 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField loginPasswordField;
 	private JTextField loginTextFieldUsername;
+	
+	private Controller simplyRugbyController;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,11 +44,13 @@ public class LoginScreen extends JFrame {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the frame.
+	 * @param controller 
 	 */
-	public LoginScreen() {
+	public LoginScreen(Controller control) {
+		simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,6 +61,18 @@ public class LoginScreen extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton loginBtnLogin = new JButton("Login");
+		loginBtnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				if (loginTextFieldUsername.getText().trim().isEmpty() || loginPasswordField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(contentPane, "Oh No! Please enter your login credientials before pressing the login button. Try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+				} else
+				{
+					control.authenticateUser();
+				}
+			}
+		});
 		loginBtnLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		loginBtnLogin.setBounds(399, 301, 137, 38);
 		contentPane.add(loginBtnLogin);
@@ -87,5 +110,20 @@ public class LoginScreen extends JFrame {
 		loginLblHeader.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		loginLblHeader.setBounds(364, 35, 200, 50);
 		contentPane.add(loginLblHeader);
+		
+		JLabel loginScreenLblImageLabel = new JLabel("{Placeholder}");
+		loginScreenLblImageLabel.setBounds(10, 11, 324, 349);
+		BufferedImage loginImg = null;
+		try {
+			loginImg = ImageIO.read(new File(
+				    "src/images/loginPageImg.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ImageIcon loginIcon = new ImageIcon(loginImg);
+		loginScreenLblImageLabel.setIcon(loginIcon);
+		contentPane.add(loginScreenLblImageLabel);
+		
 	}
 }

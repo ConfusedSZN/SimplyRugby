@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -12,10 +13,14 @@ import java.awt.Font;
 public class SplashScreen extends JFrame {
 
 	private JPanel contentPane;
+	protected static JProgressBar splashProgressBar;
+	
+	
+	private Controller simplyRugbyController;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,11 +36,13 @@ public class SplashScreen extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
 	 */
-	public SplashScreen() {
+	public SplashScreen(Controller control) {
+		simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +52,9 @@ public class SplashScreen extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
-		JProgressBar splashProgressBar = new JProgressBar();
+		splashProgressBar = new JProgressBar();
+		splashProgressBar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		splashProgressBar.setToolTipText("");
 		splashProgressBar.setBounds(50, 320, 500, 40);
 		contentPane.add(splashProgressBar);
 		

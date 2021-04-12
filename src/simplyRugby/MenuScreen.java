@@ -5,8 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
@@ -62,11 +68,20 @@ public class MenuScreen extends JFrame {
 		menuLblMenuHeader.setBounds(269, 97, 58, 32);
 		contentPane.add(menuLblMenuHeader);
 		
-		JLabel menuLblMyProfile = new JLabel("My Profile");
-		menuLblMyProfile.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		menuLblMyProfile.setBounds(387, 7, 63, 38);
-		contentPane.add(menuLblMyProfile);
-		
+		JLabel menuMyProfileLabelIcon = new JLabel("");
+		menuMyProfileLabelIcon.setBounds(398, 2, 36, 36);
+		BufferedImage loginImg = null;
+		try {
+			loginImg = ImageIO.read(new File(
+				    "src/images/user.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ImageIcon loginIcon = new ImageIcon(loginImg);
+		menuMyProfileLabelIcon.setIcon(loginIcon);
+		contentPane.add(menuMyProfileLabelIcon);
+
 		JButton menuBtnPlaceholder = new JButton("Placeholder");
 		menuBtnPlaceholder.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		menuBtnPlaceholder.setBounds(77, 136, 137, 38);
@@ -101,6 +116,11 @@ public class MenuScreen extends JFrame {
 		panel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
 		panel.setBounds(16, 53, 568, 299);
 		contentPane.add(panel);
+		
+		JLabel menuLblMyProfileText = new JLabel("My Profile");
+		menuLblMyProfileText.setFont(new Font("Times New Roman", Font.PLAIN, 11));
+		menuLblMyProfileText.setBounds(392, 40, 51, 13);
+		contentPane.add(menuLblMyProfileText);
 		
 	}
 }
