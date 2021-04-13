@@ -1,16 +1,17 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProfileScreen extends JFrame {
 
@@ -21,7 +22,7 @@ public class ProfileScreen extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,11 +38,15 @@ public class ProfileScreen extends JFrame {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the frame.
+	 * @param coachObj 
+	 * @param control 
 	 */
-	public ProfileScreen() {
+	public ProfileScreen(Coach coachObj, Controller control) {
+		Coach currentUser = coachObj;
+		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -51,11 +56,18 @@ public class ProfileScreen extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton profileBtnReturn = new JButton("Return to Menu");
+		profileBtnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuScreen menu = new MenuScreen(coachObj, control);
+				dispose();
+				menu.setVisible(true);
+			}
+		});
 		profileBtnReturn.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		profileBtnReturn.setBounds(450, 11, 124, 31);
 		contentPane.add(profileBtnReturn);
 		
-		JLabel profileLblHeader = new JLabel("{Name}'s Profile");
+		JLabel profileLblHeader = new JLabel(currentUser.getFirstName() + "'s Profile");
 		profileLblHeader.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		profileLblHeader.setBounds(10, 8, 155, 31);
 		contentPane.add(profileLblHeader);
@@ -75,12 +87,12 @@ public class ProfileScreen extends JFrame {
 		profileLblSquadIDToolTip.setBounds(30, 163, 109, 22);
 		contentPane.add(profileLblSquadIDToolTip);
 		
-		JLabel profileLblMemberID = new JLabel("{MemberID}");
+		JLabel profileLblMemberID = new JLabel(currentUser.getMemberID());
 		profileLblMemberID.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		profileLblMemberID.setBounds(53, 137, 90, 24);
 		contentPane.add(profileLblMemberID);
 		
-		JLabel profileLblSquadID = new JLabel("{SquadID}");
+		JLabel profileLblSquadID = new JLabel(currentUser.getCoachesSquadID());
 		profileLblSquadID.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		profileLblSquadID.setBounds(53, 185, 77, 24);
 		contentPane.add(profileLblSquadID);
@@ -118,6 +130,31 @@ public class ProfileScreen extends JFrame {
 		contentPane.add(profileLblConfirmPassword);
 		
 		JButton btnChangePassword = new JButton("Change Password");
+		btnChangePassword.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				
+				if (profilePasswordInputConfirm.getText().trim().isEmpty() || profilePasswordInputNew.getText().trim().isEmpty() || profilePasswordInputCurrent.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(contentPane, "Oh No! It appears you have missed an input, please try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+				} else if (profilePasswordInputNew.getText().equals(profilePasswordInputConfirm.getText()))
+				{
+					
+					boolean result = control.changePassword(profilePasswordInputCurrent.getText(), profilePasswordInputNew.getText(), currentUser);
+					
+					if(result)
+					{
+						JOptionPane.showMessageDialog(contentPane, "Yay! Your new password has been saved!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(contentPane, "Oh no! It appears that an error has occured. Please try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				} else
+				{
+					JOptionPane.showMessageDialog(contentPane, "Oh No! Your new passwords don't match. Make sure that you input your new password into both the New Password and Confirm Password inputs correctly. Please Try Again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnChangePassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnChangePassword.setBounds(387, 306, 124, 31);
 		contentPane.add(btnChangePassword);

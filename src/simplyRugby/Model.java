@@ -49,7 +49,7 @@ public class Model {
 			}
 	}
 	
-	private void saveData()
+	protected void saveData()
 	{
 		//Opens a Try block, this allows for easy error catching
 		 try {

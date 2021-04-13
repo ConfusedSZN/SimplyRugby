@@ -53,11 +53,27 @@ public class Controller {
 		
 				loginScreen.setVisible(false);
 				
-				MenuScreen menu = new MenuScreen(coachObj);
+				MenuScreen menu = new MenuScreen(coachObj, this);
 				menu.setVisible(true);
 				break;
 			}
 		}
+		return retVal;
+	}
+	
+	
+	public boolean changePassword(String currentPassword, String newPassword, Coach currentUser)
+	{
+		
+		boolean retVal = false;
+		
+		if (BCrypt.checkpw(currentPassword, currentUser.getPassword()))
+		{
+			currentUser.setPassword((BCrypt.hashpw(newPassword, BCrypt.gensalt())));
+			simplyRugbyModel.saveData();
+			retVal = true;
+		}
+
 		return retVal;
 	}
 	

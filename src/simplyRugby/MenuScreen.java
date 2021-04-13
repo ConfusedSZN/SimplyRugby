@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Menu;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,8 @@ import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MenuScreen extends JFrame {
 
@@ -44,8 +47,9 @@ public class MenuScreen extends JFrame {
 	 * Create the frame.
 	 * @param coachObj 
 	 */
-	public MenuScreen(Coach coachObj) {
+	public MenuScreen(Coach coachObj, Controller control) {
 		Coach currentUser = coachObj;
+		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,6 +99,14 @@ public class MenuScreen extends JFrame {
 		contentPane.add(menuLblMenuHeader);
 		
 		JLabel menuMyProfileLabelIcon = new JLabel("");
+		menuMyProfileLabelIcon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ProfileScreen profile = new ProfileScreen(coachObj, control);
+				dispose();
+				profile.setVisible(true);
+			}
+		});
 		menuMyProfileLabelIcon.setBounds(398, 2, 36, 36);
 		BufferedImage loginImg = null;
 		try {
@@ -104,6 +116,7 @@ public class MenuScreen extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		ImageIcon loginIcon = new ImageIcon(loginImg);
 		menuMyProfileLabelIcon.setIcon(loginIcon);
 		contentPane.add(menuMyProfileLabelIcon);
@@ -144,6 +157,15 @@ public class MenuScreen extends JFrame {
 		contentPane.add(panel);
 		
 		JLabel menuLblMyProfileText = new JLabel("My Profile");
+		menuLblMyProfileText.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ProfileScreen profile = new ProfileScreen(coachObj, control);
+				dispose();
+				profile.setVisible(true);
+			}
+		});
+		
 		menuLblMyProfileText.setFont(new Font("Times New Roman", Font.PLAIN, 11));
 		menuLblMyProfileText.setBounds(392, 40, 51, 13);
 		contentPane.add(menuLblMyProfileText);
