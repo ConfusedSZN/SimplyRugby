@@ -22,8 +22,7 @@ public class LoginScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField loginPasswordField;
-	private JTextField loginTextFieldUsername;
-	
+	private JTextField loginTextFieldUsername; 
 	private Controller simplyRugbyController;
 
 	/**
@@ -69,7 +68,15 @@ public class LoginScreen extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "Oh No! Please enter your login credientials before pressing the login button. Try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
 				} else
 				{
-					control.authenticateUser();
+					boolean result = control.authenticateUser(loginTextFieldUsername.getText(), loginPasswordField.getText());
+					
+					if(result)
+					{
+						dispose();
+						
+					} else {
+						JOptionPane.showMessageDialog(contentPane, "Oh no! It appears that this user does not exist or you have entered your credientials wrong, please try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		});

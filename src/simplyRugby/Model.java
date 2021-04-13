@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import BCrypt.BCrypt;
+
 public class Model {
 
 	private ArrayList<Coach> coachData = new ArrayList<Coach>();
@@ -73,13 +75,19 @@ public class Model {
 		/**
 		 * Data Prepopulation for Coach.
 		 */
-		System.out.println("We doing the ting");
-		coachData.add(new Coach("6SH6A521", "Kris", "Crawford","Forbes","krisforbes@simplyrugby.com", "07751259892", "57", "Boat Lane", "Reedham", "NR13 5WE", "Kris", "123", "H26YZA99"));
-		coachData.add(new Coach("4B3NR2SK", "Tristan", "McIntosh","Ritchie","tristanritchie@simplyrugby.com", "07043645025", "78", "Farburn Terrace", "Reedham", "NR13 8WZ", "Tristan", "123", ""));
-		coachData.add(new Coach("B0P2BJR6", "Angus", "MacDonald","Stevenson","angusstevenson@simplyrugby.com", "07774612118", "89", "Osborne Road", "Reedham", "NR13 4GH", "Angus", "123", "8ABTY625"));
+		String coachPassword1 = "123";
+		String coachPassword2 = "456";
+		String coachPassword3 = "789";
+		String passwordHashed1 = BCrypt.hashpw(coachPassword1, BCrypt.gensalt());
+		String passwordHashed2 = BCrypt.hashpw(coachPassword2, BCrypt.gensalt());
+		String passwordHashed3 = BCrypt.hashpw(coachPassword3, BCrypt.gensalt());
+		
+		coachData.add(new Coach("6SH6A521", "Kris", "Crawford","Forbes","krisforbes@simplyrugby.com", "07751259892", "57", "Boat Lane", "Reedham", "NR13 5WE", "Kris", passwordHashed1, "H26YZA99"));
+		coachData.add(new Coach("4B3NR2SK", "Tristan", "McIntosh","Ritchie","tristanritchie@simplyrugby.com", "07043645025", "78", "Farburn Terrace", "Reedham", "NR13 8WZ", "Tristan",passwordHashed2 , ""));
+		coachData.add(new Coach("B0P2BJR6", "Angus", "MacDonald","Stevenson","angusstevenson@simplyrugby.com", "07774612118", "89", "Osborne Road", "Reedham", "NR13 4GH", "Angus", passwordHashed3 , "8ABTY625"));
+		
 		saveData();
 	}
-
 
 	/**
 	 * @return the coachData
@@ -87,7 +95,6 @@ public class Model {
 	public ArrayList<Coach> getCoachData() {
 		return coachData;
 	}
-
 
 	/**
 	 * @param coachData the coachData to set

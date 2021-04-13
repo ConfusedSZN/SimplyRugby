@@ -1,5 +1,8 @@
 package simplyRugby;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import BCrypt.*;
 
 public class Controller {
@@ -7,6 +10,7 @@ public class Controller {
 	private Model simplyRugbyModel;
 	private SplashScreen splashScreen;
 	private LoginScreen loginScreen;
+	private MenuScreen menuScreen;
 
 	
 	public Controller()
@@ -30,11 +34,31 @@ public class Controller {
 		loginScreen.setVisible(true);
 	}
 	
-	public void authenticateUser()
+	public boolean authenticateUser(String username, String password)
 	{
 		
+		boolean retVal = false;
 		
+		ArrayList<Coach> userList = simplyRugbyModel.getCoachData();
 		
+		Iterator<Coach> it = userList.iterator();
+		
+		while(it.hasNext() == true)
+		{
+			Coach currentUser = it.next();
+			
+			if (currentUser.getUsername().equals(username) && BCrypt.checkpw(password, currentUser.getPassword()) )
+			{
+				retVal = true;
+				
+				loginScreen.setVisible(false);
+				
+				MenuScreen menu = new MenuScreen();
+				menu.setVisible(true);
+				break;
+			}
+		}
+		return retVal;
 	}
 	
 }
