@@ -45,7 +45,7 @@ public class Controller {
 		{
 			Coach currentUser = it.next();
 			
-			if (currentUser.getUsername().equals(username) && BCrypt.checkpw(password, currentUser.getPassword()) )
+			if (currentUser.getUsername().equals(username) && BCrypt.checkpw(password, currentUser.getPassword()))
 			{
 				retVal = true;
 				
@@ -60,7 +60,6 @@ public class Controller {
 		}
 		return retVal;
 	}
-	
 	
 	public boolean changePassword(String currentPassword, String newPassword, Coach currentUser)
 	{

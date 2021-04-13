@@ -18,6 +18,28 @@ public class Skill {
 	private int rating;
 	
 	/**
+	 * Constructors
+	 * 1st Constructor sets all variables within the Constructor to their default values.
+	 * 2nd Constructor sets all variables within the Constructor to the values passed in via arguments.
+	 */
+	
+	public Skill()
+	{
+		//Sets the value of skillName to null.
+		skillName = null;
+		//Sets the value of rating to 0 (null).
+		rating = 0;
+	}
+	
+	public Skill(String skillName, int rating)
+	{
+		//Sets the skillName variable within the Class to the value in the passed in parameter.
+		this.skillName = skillName;
+		//Sets the rating variable within the Class to the value in the passed in parameter.
+		this.rating = rating;
+	}
+	
+	/**
 	 * @return the skillName
 	 */
 	public String getSkillName() {

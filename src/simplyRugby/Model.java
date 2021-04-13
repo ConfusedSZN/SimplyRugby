@@ -86,6 +86,53 @@ public class Model {
 		coachData.add(new Coach("4B3NR2SK", "Tristan", "McIntosh","Ritchie","tristanritchie@simplyrugby.com", "07043645025", "78", "Farburn Terrace", "Reedham", "NR13 8WZ", "Tristan",passwordHashed2 , ""));
 		coachData.add(new Coach("B0P2BJR6", "Angus", "MacDonald","Stevenson","angusstevenson@simplyrugby.com", "07774612118", "89", "Osborne Road", "Reedham", "NR13 4GH", "Angus", passwordHashed3 , "8ABTY625"));
 		
+		/**
+		 * Data prepopulation for skills
+		 */
+		ArrayList<Skill> skillList1 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList2 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList3 = new ArrayList<Skill>();
+		
+		Skill Skill1 = new Skill("Speed", 33);
+		Skill Skill2 = new Skill("Decision Making", 66);
+		Skill Skill3 = new Skill("Penality Taking", 99);
+		
+		skillList1.add(Skill1);
+		skillList2.add(Skill2);
+		skillList3.add(Skill3);
+		
+		/**
+		 * Data prepopulation for skill categories
+		 */
+		
+		SkillCategory Category1 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList1);
+		SkillCategory Category2 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList2);
+		SkillCategory Category3 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList3);
+	
+		/**
+		 * Data prepopulation for players
+		 */
+		
+		Player Player1 = new Player();
+		Player Player2 = new Player();
+		Player Player3 = new Player();
+		
+		/**
+		 * Data Prepopulation for Squad's.
+		 */
+		
+		ArrayList<Player> playerList1 = null;
+		ArrayList<Player> playerList2 = null;
+		ArrayList<Player> playerList3 = null;
+		
+		playerList1.add(Player1);
+		playerList2.add(Player2);
+		playerList3.add(Player3);
+		
+		Squad Squad1 = new Squad();
+		Squad Squad2 = new Squad();
+		Squad Squad3 = new Squad();
+		
 		saveData();
 	}
 

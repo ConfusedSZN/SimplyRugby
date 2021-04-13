@@ -25,6 +25,31 @@ public class SkillCategory {
 	private ArrayList<Skill> categorySkillList;
 	
 	/**
+	 * Constructors
+	 * 1st Constructor sets all variables within the Constructor to their default values.
+	 * 2nd Constructor sets all variables within the Constructor to the values passed in via arguments.
+	 */
+	
+	public SkillCategory()
+	{
+		//Sets the value of categoryName to null.
+		categoryName = null;
+		//Sets the value of categoryNotes to null.
+		categoryNotes = null;
+		//Sets the value of categorySkillList to null.
+		categorySkillList = null;
+	}
+	
+	public SkillCategory(String categoryName, String categoryNotes, ArrayList<Skill> categorySkillList)
+	{
+		this.categoryName = categoryName;
+		
+		this.categoryNotes = categoryNotes;
+		
+		this.categorySkillList = categorySkillList;
+	}
+	
+	/**
 	 * @return the categoryName
 	 */
 	public String getCategoryName() {

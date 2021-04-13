@@ -24,6 +24,36 @@ public class Squad {
 	private ArrayList<Player> playerList;
 	
 	/**
+	 * Constructors
+	 * 1st Constructor sets all variables within the Constructor to their default values.
+	 * 2nd Constructor sets all variables within the Constructor to the values passed in via arguments.
+	 */
+	
+	public Squad()
+	{
+		//Sets the value of squadID to null.
+		squadID = null;
+		//Sets the value of name to null.
+		name = null;
+		//Sets the value of ageRange to null.
+		ageRange = null;
+		//Sets the value of playerList to null.
+		playerList = null;
+	}
+	
+	public Squad(String squadID, String name, String ageRange, ArrayList<Player> playerList)
+	{
+		//Sets the squadID variable within the Class to the value in the passed in parameter.
+		this.squadID = squadID;
+		//Sets the name variable within the Class to the value in the passed in parameter.
+		this.name = name;
+		//Sets the ageRange variable within the Class to the value in the passed in parameter.
+		this.ageRange = ageRange;
+		//Sets the playerList variable within the Class to the value in the passed in parameter.
+		this.playerList = playerList;
+	}
+	
+	/**
 	 * @return the squadID
 	 */
 	public String getSquadID() {
