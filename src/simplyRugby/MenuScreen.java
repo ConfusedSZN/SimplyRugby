@@ -1,7 +1,5 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +10,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
@@ -23,7 +22,7 @@ public class MenuScreen extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,11 +38,14 @@ public class MenuScreen extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
+	 * @param coachObj 
 	 */
-	public MenuScreen() {
+	public MenuScreen(Coach coachObj) {
+		Coach currentUser = coachObj;
 		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +60,31 @@ public class MenuScreen extends JFrame {
 		menuBtnLogout.setBounds(460, 11, 124, 31);
 		contentPane.add(menuBtnLogout);
 		
-		JLabel menuLblHeader = new JLabel("Good {TimeFrame} Coach {Name}");
+		/**
+		 * menuLblHeader is the label that is at the head of the menu.
+		 * It is used to display a greeting message to the Coach upon them opening the menu.
+		 * A Calendar is used in this process to get the current time of the system.
+		 */
+		
+		Calendar c = Calendar.getInstance();
+		int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+		
+		String timeFrame = null;
+
+		if(timeOfDay >= 0 && timeOfDay < 12){
+			timeFrame = "Morning";
+		         
+		}else if(timeOfDay >= 12 && timeOfDay < 16){
+			timeFrame = "Afternoon";
+		
+		}else if(timeOfDay >= 16 && timeOfDay < 24){
+			timeFrame = "Evening";
+		} else
+		{
+			timeFrame = "Day";
+		}
+		
+		JLabel menuLblHeader = new JLabel("Good " + timeFrame + " Coach " + currentUser.getLastName());
 		menuLblHeader.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		menuLblHeader.setBounds(16, 8, 316, 31);
 		contentPane.add(menuLblHeader);

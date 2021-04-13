@@ -10,8 +10,6 @@ public class Controller {
 	private Model simplyRugbyModel;
 	private SplashScreen splashScreen;
 	private LoginScreen loginScreen;
-	private MenuScreen menuScreen;
-
 	
 	public Controller()
 	{
@@ -51,9 +49,11 @@ public class Controller {
 			{
 				retVal = true;
 				
+				Coach coachObj = currentUser;
+		
 				loginScreen.setVisible(false);
 				
-				MenuScreen menu = new MenuScreen();
+				MenuScreen menu = new MenuScreen(coachObj);
 				menu.setVisible(true);
 				break;
 			}
