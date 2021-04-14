@@ -68,6 +68,14 @@ public class Controller {
 		squadViewScreen.setVisible(true);
 	}
 	
+	public void displaySquadEdit(Coach coach)
+	{
+		EditSquadScreen squadEditScreen;
+		squadEditScreen = new EditSquadScreen(coach, findSquad(coach), this);
+		squadEditScreen.setVisible(true);
+				
+	}
+	
 	public boolean authenticateUser(String username, String password)
 	{
 		
@@ -132,4 +140,12 @@ public class Controller {
 		return currentSquad;
 	}
 	
+	public ArrayList<Player> findPlayerInformation(Squad squad)
+	{
+		
+		ArrayList<Player> retVal = squad.getPlayerList();
+		
+		return retVal;
+
+	}
 }

@@ -173,9 +173,9 @@ public class Model {
 		playerList2.add(Player2);
 		playerList3.add(Player3);
 		
-		Squad Squad1 = new Squad("H26YZA99", "U20 Squad 1", "U18", playerList1);
+		Squad Squad1 = new Squad("H26YZA99", "U18 Squad 1", "U18", playerList1);
 		Squad Squad2 = new Squad("OKYHF5GS", "Senior Squad 1", "Senior", playerList2);
-		Squad Squad3 = new Squad("8ABTY625", "6-8 Squad 1", "U8", playerList3);
+		Squad Squad3 = new Squad("8ABTY625", "U8 Squad 1", "U8", playerList3);
 		
 		squadData.add(Squad1);
 		squadData.add(Squad2);

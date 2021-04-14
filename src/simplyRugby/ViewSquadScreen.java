@@ -83,6 +83,8 @@ public class ViewSquadScreen extends JFrame {
 		scrollPane.setBounds(36, 93, 528, 202);
 		contentPane.add(scrollPane);
 		
+		ArrayList<Player> retVal = simplyRugbyController.findPlayerInformation(currentSquad);
+		
 		viewSquadTablePlayerData = new JTable();
 		viewSquadTablePlayerData.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -100,6 +102,12 @@ public class ViewSquadScreen extends JFrame {
 		contentPane.add(viewSquadBtnViewSelectedPlayer);
 		
 		JButton viewSquadBtnEditSquad = new JButton("Edit Squad");
+		viewSquadBtnEditSquad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displaySquadEdit(currentUser);
+			}
+		});
 		viewSquadBtnEditSquad.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		viewSquadBtnEditSquad.setBounds(315, 310, 153, 36);
 		contentPane.add(viewSquadBtnEditSquad);

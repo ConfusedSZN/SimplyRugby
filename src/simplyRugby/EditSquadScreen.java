@@ -1,7 +1,5 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,12 +8,14 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
-public class EditSquad extends JFrame {
+public class EditSquadScreen extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField editSquadSquadNameInput;
@@ -24,12 +24,12 @@ public class EditSquad extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditSquad frame = new EditSquad();
+					EditSquadScreen frame = new EditSquadScreen();
 					frame.pack();
 					frame.setSize(600, 400);
 					frame.setLocationRelativeTo(null);
@@ -40,11 +40,19 @@ public class EditSquad extends JFrame {
 			}
 		});
 	}
-
+	 */
+	
 	/**
 	 * Create the frame.
+	 * @param control 
+	 * @param squad 
+	 * @param coach 
 	 */
-	public EditSquad() {
+	public EditSquadScreen(Coach coachObj, Squad squadObj, Controller control) {
+		setResizable(false);
+		Coach currentUser = coachObj;
+		Squad currentSquad = squadObj;
+		Controller simplyRugbyController = control;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -53,16 +61,23 @@ public class EditSquad extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton editSquadBtnReturn = new JButton("Return to Menu");
+		editSquadBtnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displayMenu(currentUser);
+			}
+		});
 		editSquadBtnReturn.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		editSquadBtnReturn.setBounds(450, 11, 124, 31);
 		contentPane.add(editSquadBtnReturn);
 		
-		JLabel editSquadLblHeader = new JLabel("Editing {Squad Name}");
+		JLabel editSquadLblHeader = new JLabel("Editing " + currentSquad.getName());
 		editSquadLblHeader.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		editSquadLblHeader.setBounds(10, 11, 427, 31);
 		contentPane.add(editSquadLblHeader);
 		
 		editSquadSquadNameInput = new JTextField();
+		editSquadSquadNameInput.setText(currentSquad.getName());
 		editSquadSquadNameInput.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		editSquadSquadNameInput.setBounds(35, 114, 196, 34);
 		contentPane.add(editSquadSquadNameInput);
@@ -74,6 +89,52 @@ public class EditSquad extends JFrame {
 		contentPane.add(editSquadLblSquadNameTooltip);
 		
 		JComboBox editSquadComboBoxAgeRange = new JComboBox();
+		editSquadComboBoxAgeRange.setModel(new DefaultComboBoxModel(new String[] {"6 - 8", "U8", "U9", "U10", "U11", "U12", "U13", "U14", "U15", "U16", "U18", "U20", "Senior"}));
+		
+		switch(currentSquad.getAgeRange()) {
+		  case "6 - 8":
+			  editSquadComboBoxAgeRange.setSelectedIndex(0);
+		    break;
+		  case "U8":
+			  editSquadComboBoxAgeRange.setSelectedIndex(1);
+		    break;
+		  case "U9":
+			  editSquadComboBoxAgeRange.setSelectedIndex(2);
+			    break;
+		  case "U10":
+			  editSquadComboBoxAgeRange.setSelectedIndex(3);
+			    break;
+		  case "U11":
+			  editSquadComboBoxAgeRange.setSelectedIndex(4);
+			    break;
+		  case "U12":
+			  editSquadComboBoxAgeRange.setSelectedIndex(5);
+			    break;
+		  case "U13":
+			  editSquadComboBoxAgeRange.setSelectedIndex(6);
+			    break;
+		  case "U14":
+			  editSquadComboBoxAgeRange.setSelectedIndex(7);
+			    break;
+		  case "U15":
+			  editSquadComboBoxAgeRange.setSelectedIndex(8);
+			    break;
+		  case "U16":
+			  editSquadComboBoxAgeRange.setSelectedIndex(9);
+			    break;
+		  case "U18":
+			  editSquadComboBoxAgeRange.setSelectedIndex(10);
+			    break;
+		  case "U20":
+			  editSquadComboBoxAgeRange.setSelectedIndex(11);
+			    break;
+		  case "Senior":
+			  editSquadComboBoxAgeRange.setSelectedIndex(12);
+			    break;
+		  default:
+			  editSquadComboBoxAgeRange.setSelectedIndex(-1);
+		}
+		
 		editSquadComboBoxAgeRange.setBounds(237, 114, 180, 34);
 		contentPane.add(editSquadComboBoxAgeRange);
 		
@@ -82,7 +143,7 @@ public class EditSquad extends JFrame {
 		editSquadLblSquadAgeRangeToolTip.setBounds(237, 95, 102, 14);
 		contentPane.add(editSquadLblSquadAgeRangeToolTip);
 		
-		JButton editSquadBtnSaveAndReturn = new JButton("Save & Return to Menu");
+		JButton editSquadBtnSaveAndReturn = new JButton("Save");
 		editSquadBtnSaveAndReturn.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		editSquadBtnSaveAndReturn.setBounds(424, 114, 150, 34);
 		contentPane.add(editSquadBtnSaveAndReturn);
