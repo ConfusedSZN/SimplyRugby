@@ -17,6 +17,8 @@ import BCrypt.BCrypt;
 
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewSquadScreen extends JFrame {
 
@@ -62,6 +64,12 @@ public class ViewSquadScreen extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton viewSquadBtnReturn = new JButton("Return to Menu");
+		viewSquadBtnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displayMenu(currentUser);
+			}
+		});
 		viewSquadBtnReturn.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		viewSquadBtnReturn.setBounds(460, 11, 124, 31);
 		contentPane.add(viewSquadBtnReturn);
@@ -78,22 +86,12 @@ public class ViewSquadScreen extends JFrame {
 		viewSquadTablePlayerData = new JTable();
 		viewSquadTablePlayerData.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null},
 			},
 			new String[] {
-				"Player Name", "Position", "Rating"
+				"New column", "New column", "New column"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		viewSquadTablePlayerData.getColumnModel().getColumn(0).setResizable(false);
-		viewSquadTablePlayerData.getColumnModel().getColumn(0).setPreferredWidth(333);
-		viewSquadTablePlayerData.getColumnModel().getColumn(1).setPreferredWidth(158);
-		viewSquadTablePlayerData.getColumnModel().getColumn(2).setPreferredWidth(130);
+		));
 		scrollPane.setViewportView(viewSquadTablePlayerData);
 		
 		JButton viewSquadBtnViewSelectedPlayer = new JButton("View Selected Player");

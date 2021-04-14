@@ -9,10 +9,12 @@ public class Controller {
 
 	private Model simplyRugbyModel;
 	private SplashScreen splashScreen;
-	private LoginScreen loginScreen;
 	
 	public Controller()
 	{
+		
+		LoginScreen loginScreen;
+		
 		simplyRugbyModel = new Model();
 		splashScreen = new SplashScreen(this);
 		loginScreen = new LoginScreen(this);
@@ -32,14 +34,46 @@ public class Controller {
 		loginScreen.setVisible(true);
 	}
 	
+	public void displayLogin()
+	{
+		LoginScreen loginScreen;
+		
+		loginScreen = new LoginScreen(this);
+		loginScreen.setVisible(true);
+		
+	}
+	
+	public void displayMenu(Coach coach)
+	{
+		MenuScreen menuScreen;
+		
+		menuScreen = new MenuScreen(coach, null, this);
+		menuScreen.setVisible(true);
+		
+	}
+	
+	public void displayProfile(Coach coach)
+	{
+		ProfileScreen profileScreen;
+		
+		profileScreen = new ProfileScreen(coach, this);
+		profileScreen.setVisible(true);
+		
+	}
+	
+	public void displaySquadView(Coach coach)
+	{
+		ViewSquadScreen squadViewScreen;
+		squadViewScreen = new ViewSquadScreen(coach, findSquad(coach), this);
+		squadViewScreen.setVisible(true);
+	}
+	
 	public boolean authenticateUser(String username, String password)
 	{
 		
 		boolean retVal = false;
 		
 		ArrayList<Coach> userList = simplyRugbyModel.getCoachData();
-		
-		ArrayList<Squad> squadList = simplyRugbyModel.getSquadData();
 		
 		Iterator<Coach> coachIt = userList.iterator();
 		
@@ -49,31 +83,11 @@ public class Controller {
 			
 			if (currentUser.getUsername().equals(username) && BCrypt.checkpw(password, currentUser.getPassword()))
 			{
+				
 				retVal = true;
-				
-				Coach coachObj = currentUser;
-				
-				String squadID = currentUser.getCoachesSquadID();
-				
-				Iterator<Squad> squadIt = squadList.iterator();
-				
-				while(squadIt.hasNext() == true)
-				{
-					
-					Squad currentSquad = squadIt.next();
-					
-					if (currentSquad.getSquadID().equals(squadID))
-					{
-						
-						Squad squadObj = currentSquad;
-						
-						loginScreen.setVisible(false);
-						
-						MenuScreen menu = new MenuScreen(coachObj, squadObj, this);
-						menu.setVisible(true);
-						break;
-					}
-				}
+				MenuScreen menu = new MenuScreen(currentUser, findSquad(currentUser), this);
+				menu.setVisible(true);
+				break;
 			}
 		}
 		return retVal;
@@ -92,6 +106,30 @@ public class Controller {
 		}
 
 		return retVal;
+	}
+	
+	public Squad findSquad(Coach currentUser)
+	{
+		
+		Squad currentSquad = null;
+		
+		String squadID = currentUser.getCoachesSquadID();
+		
+		ArrayList<Squad> squadList = simplyRugbyModel.getSquadData();
+		
+		Iterator<Squad> squadIt = squadList.iterator();
+		
+		while(squadIt.hasNext() == true)
+		{
+			
+			currentSquad = squadIt.next();
+			
+			if (currentSquad.getSquadID().equals(squadID))
+			{
+				break;
+			}
+		}
+		return currentSquad;
 	}
 	
 }

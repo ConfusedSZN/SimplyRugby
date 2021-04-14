@@ -44,9 +44,8 @@ public class ProfileScreen extends JFrame {
 	 * @param coachObj 
 	 * @param control 
 	 */
-	public ProfileScreen(Coach coachObj, Squad squadObj,  Controller control) {
+	public ProfileScreen(Coach coachObj, Controller control) {
 		Coach currentUser = coachObj;
-		Squad currentSquad = squadObj;
 		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,9 +58,8 @@ public class ProfileScreen extends JFrame {
 		JButton profileBtnReturn = new JButton("Return to Menu");
 		profileBtnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuScreen menu = new MenuScreen(coachObj, squadObj, control);
 				dispose();
-				menu.setVisible(true);
+				simplyRugbyController.displayMenu(coachObj);
 			}
 		});
 		profileBtnReturn.setFont(new Font("Tahoma", Font.PLAIN, 13));

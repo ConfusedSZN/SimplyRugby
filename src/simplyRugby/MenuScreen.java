@@ -64,6 +64,12 @@ public class MenuScreen extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton menuBtnLogout = new JButton("Logout");
+		menuBtnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displayLogin();
+			}
+		});
 		menuBtnLogout.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		menuBtnLogout.setBounds(460, 11, 124, 31);
 		contentPane.add(menuBtnLogout);
@@ -106,9 +112,8 @@ public class MenuScreen extends JFrame {
 		menuMyProfileLabelIcon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProfileScreen profile = new ProfileScreen(coachObj, squadObj, control);
 				dispose();
-				profile.setVisible(true);
+				simplyRugbyController.displayProfile(currentUser);
 			}
 		});
 		menuMyProfileLabelIcon.setBounds(398, 2, 36, 36);
@@ -134,9 +139,8 @@ public class MenuScreen extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "Oh no! You don't have a squad linked to your account, please talk to administrator to resolve this issue.", "Alert!", JOptionPane.ERROR_MESSAGE);
 				} else
 				{
-					ViewSquadScreen squadView = new ViewSquadScreen(coachObj, squadObj, control);
 					dispose();
-					squadView.setVisible(true);
+					simplyRugbyController.displaySquadView(currentUser);
 				}
 			}
 		});
@@ -178,9 +182,8 @@ public class MenuScreen extends JFrame {
 		menuLblMyProfileText.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProfileScreen profile = new ProfileScreen(coachObj, squadObj, control);
 				dispose();
-				profile.setVisible(true);
+				simplyRugbyController.displayProfile(currentUser);
 			}
 		});
 		
