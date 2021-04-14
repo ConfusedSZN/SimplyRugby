@@ -12,8 +12,9 @@ package simplyRugby;
 
 import java.util.ArrayList;
 
-public class Squad {
-	
+public class Squad implements java.io.Serializable{
+	//Initialises and Sets the VersionID for serialisation, This ensures that when Data is saved, it's saved in the same way.
+	private static final long serialVersionUID = 541583651513199852L;
 	//Declares the squadID variable that is used to store a identifier for the squad. 
 	private String squadID;
 	//Declares the name variable that is used to store the name of the squad within the system.

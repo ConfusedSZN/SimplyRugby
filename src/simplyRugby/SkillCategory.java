@@ -15,8 +15,9 @@ package simplyRugby;
 //Imports ArrayList utility for storing data as an array list.
 import java.util.ArrayList;
 
-public class SkillCategory {
-
+public class SkillCategory implements java.io.Serializable{
+	//Initialises and Sets the VersionID for serialisation, This ensures that when Data is saved, it's saved in the same way.
+	private static final long serialVersionUID = 541583651513199852L;
 	//Declares categoryName variable that is used to store information about the name of the category.
 	private String categoryName;
 	//Declares categoryNotes variable that is used to store information within the category.

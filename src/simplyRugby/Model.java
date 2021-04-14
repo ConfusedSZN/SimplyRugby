@@ -165,9 +165,9 @@ public class Model {
 		 * Data Prepopulation for Squad's.
 		 */
 		
-		ArrayList<Player> playerList1 = null;
-		ArrayList<Player> playerList2 = null;
-		ArrayList<Player> playerList3 = null;
+		ArrayList<Player> playerList1 = new ArrayList<Player>();
+		ArrayList<Player> playerList2 = new ArrayList<Player>();
+		ArrayList<Player> playerList3 = new ArrayList<Player>();
 		
 		playerList1.add(Player1);
 		playerList2.add(Player2);

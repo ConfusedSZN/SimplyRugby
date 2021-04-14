@@ -11,7 +11,9 @@ package simplyRugby;
  *
  */
 
-public class Skill {
+public class Skill implements java.io.Serializable{
+	//Initialises and Sets the VersionID for serialisation, This ensures that when Data is saved, it's saved in the same way.
+	private static final long serialVersionUID = 541583651513199852L;
 	//Declares the skillName variable for use within the skill tracking part of the system.
 	private String skillName;
 	//Declares the rating variable for use within the skill tracking part of the system.
