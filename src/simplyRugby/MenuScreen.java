@@ -14,10 +14,13 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuScreen extends JFrame {
 
@@ -47,8 +50,9 @@ public class MenuScreen extends JFrame {
 	 * Create the frame.
 	 * @param coachObj 
 	 */
-	public MenuScreen(Coach coachObj, Controller control) {
+	public MenuScreen(Coach coachObj, Squad squadObj, Controller control) {
 		Coach currentUser = coachObj;
+		Squad currentSquad = squadObj;
 		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
@@ -102,7 +106,7 @@ public class MenuScreen extends JFrame {
 		menuMyProfileLabelIcon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProfileScreen profile = new ProfileScreen(coachObj, control);
+				ProfileScreen profile = new ProfileScreen(coachObj, squadObj, control);
 				dispose();
 				profile.setVisible(true);
 			}
@@ -121,10 +125,24 @@ public class MenuScreen extends JFrame {
 		menuMyProfileLabelIcon.setIcon(loginIcon);
 		contentPane.add(menuMyProfileLabelIcon);
 
-		JButton menuBtnPlaceholder = new JButton("Placeholder");
-		menuBtnPlaceholder.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		menuBtnPlaceholder.setBounds(77, 136, 137, 38);
-		contentPane.add(menuBtnPlaceholder);
+		JButton menuBtnViewSquad = new JButton("View Squad");
+		menuBtnViewSquad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (currentUser.getCoachesSquadID().isEmpty())
+				{
+					JOptionPane.showMessageDialog(contentPane, "Oh no! You don't have a squad linked to your account, please talk to administrator to resolve this issue.", "Alert!", JOptionPane.ERROR_MESSAGE);
+				} else
+				{
+					ViewSquadScreen squadView = new ViewSquadScreen(coachObj, squadObj, control);
+					dispose();
+					squadView.setVisible(true);
+				}
+			}
+		});
+		menuBtnViewSquad.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		menuBtnViewSquad.setBounds(77, 136, 137, 38);
+		contentPane.add(menuBtnViewSquad);
 		
 		JButton menuBtnPlaceholder_1 = new JButton("Placeholder");
 		menuBtnPlaceholder_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -160,7 +178,7 @@ public class MenuScreen extends JFrame {
 		menuLblMyProfileText.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProfileScreen profile = new ProfileScreen(coachObj, control);
+				ProfileScreen profile = new ProfileScreen(coachObj, squadObj, control);
 				dispose();
 				profile.setVisible(true);
 			}

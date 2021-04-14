@@ -1,16 +1,20 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import BCrypt.BCrypt;
+
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 
@@ -21,7 +25,7 @@ public class ViewSquadScreen extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,11 +41,17 @@ public class ViewSquadScreen extends JFrame {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the frame.
+	 * @param squadObj 
+	 * @param coachObj 
 	 */
-	public ViewSquadScreen() {
+	public ViewSquadScreen(Coach coachObj, Squad squadObj, Controller control) {
+		Coach currentUser = coachObj;
+		Squad currentSquad = squadObj;
+		Controller simplyRugbyController = control;
+	
 		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,15 +61,12 @@ public class ViewSquadScreen extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		
-		
-		
-		
 		JButton viewSquadBtnReturn = new JButton("Return to Menu");
 		viewSquadBtnReturn.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		viewSquadBtnReturn.setBounds(460, 11, 124, 31);
 		contentPane.add(viewSquadBtnReturn);
 		
-		JLabel lblsquadNameAt = new JLabel("{Squad Name} at {Age Range} Information");
+		JLabel lblsquadNameAt = new JLabel(currentSquad.getName() + " at " + currentSquad.getAgeRange() + " Information");
 		lblsquadNameAt.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblsquadNameAt.setBounds(10, 11, 440, 31);
 		contentPane.add(lblsquadNameAt);

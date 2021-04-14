@@ -39,23 +39,41 @@ public class Controller {
 		
 		ArrayList<Coach> userList = simplyRugbyModel.getCoachData();
 		
-		Iterator<Coach> it = userList.iterator();
+		ArrayList<Squad> squadList = simplyRugbyModel.getSquadData();
 		
-		while(it.hasNext() == true)
+		Iterator<Coach> coachIt = userList.iterator();
+		
+		while(coachIt.hasNext() == true)
 		{
-			Coach currentUser = it.next();
+			Coach currentUser = coachIt.next();
 			
 			if (currentUser.getUsername().equals(username) && BCrypt.checkpw(password, currentUser.getPassword()))
 			{
 				retVal = true;
 				
 				Coach coachObj = currentUser;
-		
-				loginScreen.setVisible(false);
 				
-				MenuScreen menu = new MenuScreen(coachObj, this);
-				menu.setVisible(true);
-				break;
+				String squadID = currentUser.getCoachesSquadID();
+				
+				Iterator<Squad> squadIt = squadList.iterator();
+				
+				while(squadIt.hasNext() == true)
+				{
+					
+					Squad currentSquad = squadIt.next();
+					
+					if (currentSquad.getSquadID().equals(squadID))
+					{
+						
+						Squad squadObj = currentSquad;
+						
+						loginScreen.setVisible(false);
+						
+						MenuScreen menu = new MenuScreen(coachObj, squadObj, this);
+						menu.setVisible(true);
+						break;
+					}
+				}
 			}
 		}
 		return retVal;
