@@ -1,5 +1,7 @@
 package simplyRugby;
 
+import java.util.Date;
+
 /**
  * <H1> Class - Coach</H1>
  * <p>
@@ -42,10 +44,10 @@ public class Coach extends Member{
 	}
 	
 	public Coach(String memberID, String firstName, String middleNames, String lastName, String email, String phoneNo, String address1,
-			String address2, String city, String postcode, String username, String password, String coachesSquadID)
+			String address2, String city, String postcode, Date DOB, String username, String password, String coachesSquadID)
 	{
 		//The Super keyword is used to access the data of the parent class, in this case, Member. These values are also passed in as Parameters, then set.
-		super(memberID, firstName, middleNames, lastName, email, phoneNo, address1, address2, city, postcode);
+		super(memberID, firstName, middleNames, lastName, email, phoneNo, address1, address2, city, postcode, DOB);
 		//Sets the username variable within the Class to the value in the passed in parameter.
 		this.username = username;
 		//Sets the password variable within the Class to the value in the passed in parameter.

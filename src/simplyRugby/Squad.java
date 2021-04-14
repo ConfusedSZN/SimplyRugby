@@ -53,6 +53,7 @@ public class Squad {
 		this.playerList = playerList;
 	}
 	
+	
 	/**
 	 * @return the squadID
 	 */

@@ -15,6 +15,7 @@ package simplyRugby;
 
 //Imports ArrayList utility for storing data as an array list.
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Player extends Member{
 	//Initialises and Sets the VersionID for serialisation, This ensures that when Data is saved, it's saved in the same way.
@@ -52,11 +53,11 @@ public class Player extends Member{
 	}
 	
 	public Player(String memberID, String firstName, String middleNames, String lastName, String email, String phoneNo, String address1,
-			String address2, String city, String postcode, String scrumsID, String position, String emergencyContactName,
+			String address2, String city, String postcode, Date DOB, String scrumsID, String position, String emergencyContactName,
 			String emergencyContactNo, ArrayList<SkillCategory> playerSkills)
 	{
 		//The Super keyword is used to access the data of the parent class, in this case, Member. These values are also passed in as Parameters, then set.
-		super(memberID, firstName, middleNames, lastName, email, phoneNo, address1, address2, city, postcode);
+		super(memberID, firstName, middleNames, lastName, email, phoneNo, address1, address2, city, postcode, DOB);
 		//Sets the scrumsID variable within the Class to the value in the passed in parameter.
 		this.scrumsID = scrumsID;
 		//Sets the position variable within the Class to the value in the passed in parameter.

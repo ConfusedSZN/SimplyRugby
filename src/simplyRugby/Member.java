@@ -1,5 +1,7 @@
 package simplyRugby;
 
+import java.util.Date;
+
 /**
  * <H1> Class - Member</H1>
  * <p>
@@ -33,6 +35,8 @@ public class Member implements java.io.Serializable{
 	private String city;
 	//Declares postcode variable that is used to store the postcode of the member.
 	private String postcode;
+	//Declares DOB variable that is used to store the date of birth of the member.
+	private Date DOB;
 	
 	/**
 	 * Constructors
@@ -63,10 +67,12 @@ public class Member implements java.io.Serializable{
 		city = null;
 		//Sets the value of postcode to null.
 		postcode = null;
+		//Sets the value of DOB to null.
+		DOB = (null);
 	}
 	
 	public Member(String memberID, String firstName, String middleNames, String lastName, String email, String phoneNo, String address1,
-			String address2, String city, String postcode)
+			String address2, String city, String postcode, Date DOB)
 	{
 		//Sets the memberID variable within the Class to the value in the passed in parameter.
 		this.memberID = memberID;
@@ -88,6 +94,8 @@ public class Member implements java.io.Serializable{
 		this.city = city;
 		//Sets the postcode variable within the Class to the value in the passed in parameter.
 		this.postcode = postcode;
+		//Sets the DOB variable within the Class to the value in the passed in parameter.
+		this.DOB = DOB;
 	}
 	
 	/**
@@ -209,6 +217,20 @@ public class Member implements java.io.Serializable{
 	 */
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	/**
+	 * @return the dOB
+	 */
+	public Date getDOB() {
+		return DOB;
+	}
+
+	/**
+	 * @param dOB the dOB to set
+	 */
+	public void setDOB(Date dOB) {
+		DOB = dOB;
 	}
 	
 }
