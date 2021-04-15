@@ -1,12 +1,13 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,7 +23,7 @@ public class EditPlayerScreen extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,11 +39,19 @@ public class EditPlayerScreen extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
+	 * @param control 
+	 * @param playerObj 
+	 * @param coachObj 
 	 */
-	public EditPlayerScreen() {
+	public EditPlayerScreen(Coach coachObj, Player playerObj, Controller control) {
+		setTitle("Simply Rugby");
+		Coach currentUser = coachObj;
+		Player currentPlayer = playerObj;
+		Controller simplyRugbyController = control;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -56,31 +65,105 @@ public class EditPlayerScreen extends JFrame {
 		editPlayerBtnReturn.setBounds(457, 20, 124, 31);
 		contentPane.add(editPlayerBtnReturn);
 		
-		JLabel EditPlayerLblHeader = new JLabel("Editing {Player Name}");
+		JLabel EditPlayerLblHeader = new JLabel("Editing " + currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
 		EditPlayerLblHeader.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		EditPlayerLblHeader.setBounds(16, 20, 208, 30);
+		EditPlayerLblHeader.setBounds(16, 20, 360, 30);
 		contentPane.add(EditPlayerLblHeader);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(212, 75, 360, 271);
 		contentPane.add(scrollPane);
 		
-		editPlayerTableSkillData = new JTable();
-		editPlayerTableSkillData.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Skill Category", "Skill Name", "Rating"
+		DefaultTableModel model = new DefaultTableModel()
+		{
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		
+		editPlayerTableSkillData = new JTable(model);
+		
+		model.addColumn("Skill Category");
+		model.addColumn("Skill Name");
+		model.addColumn("Rating");
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			
+			ArrayList<Skill> skill = sc.getCategorySkillList();
+				
+			String currentSkillName = null;
+			int currentSkillRating = 0;
+			
+			for (Skill s: skill)
+			{
+				currentSkillName = s.getSkillName();
+				currentSkillRating = s.getRating();
+				model.addRow(new Object[]{sc.getCategoryName(), currentSkillName , currentSkillRating});
 			}
-		));
+			
+		}
+		
+		
 		scrollPane.setViewportView(editPlayerTableSkillData);
 		
 		JLabel editPlayerLblPlayerPositionTooltip = new JLabel("Player Position:");
 		editPlayerLblPlayerPositionTooltip.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		editPlayerLblPlayerPositionTooltip.setBounds(28, 75, 82, 20);
 		contentPane.add(editPlayerLblPlayerPositionTooltip);
+	
 		
 		JComboBox editPlayerComboBoxPlayerPosition = new JComboBox();
+		editPlayerComboBoxPlayerPosition.setModel(new DefaultComboBoxModel(new String[] {"Loosehead Prop", "Hooker", "Tighthead Prop", "Second Row", "Blindside Flanker", "Openside Flanker"
+				, "Number 8", "Scrum Half", "Fly Half", "Inside Centre", "Outside Centre", "Left Wing", "Right Wing", "Full Back"}));
+		switch(currentPlayer.getPosition()) {
+		  case "Loosehead Prop":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(0);
+		    break;
+		  case "Hooker":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(1);
+		    break;
+		  case "Tighthead Prop":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(2);
+		    break;
+		  case "Second Row":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(3);
+		    break;
+		  case "Blindside Flanker":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(4);
+		    break;
+		  case "Openside Flanker":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(5);
+		    break;
+		  case "Number 8":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(6);
+		    break;
+		  case "Scrum Half":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(7);
+		    break;
+		  case "Fly Half":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(8);
+		    break;
+		  case "Inside Centre":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(9);
+		    break;
+		  case "Outside Centre":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(10);
+		    break;
+		  case "Left Wing":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(11);
+		    break;
+		  case "Right Wing":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(12);
+		    break;
+		  case "Full Back":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(13);
+		    break;
+		  default:
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(-1);
+		}
 		editPlayerComboBoxPlayerPosition.setBounds(28, 98, 176, 34);
 		contentPane.add(editPlayerComboBoxPlayerPosition);
 		

@@ -86,6 +86,15 @@ public class Controller {
 		viewPlayerScreen.setVisible(true);
 	}
 	
+	public void displayEditPlayer(Coach coach, Player player)
+	{
+		
+		EditPlayerScreen editPlayerScreen;
+		editPlayerScreen = new EditPlayerScreen(coach, player, this);
+		editPlayerScreen.setVisible(true);
+		
+	}
+	
 	public boolean authenticateUser(String username, String password)
 	{
 		

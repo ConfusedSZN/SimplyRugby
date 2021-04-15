@@ -195,6 +195,12 @@ public class ViewPlayerScreen extends JFrame {
 		contentPane.add(viewPlayerLblECNumber);
 		
 		JButton btnEditPlayer = new JButton("Edit Player");
+		btnEditPlayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displayEditPlayer(coachObj, currentPlayer);
+			}
+		});
 		btnEditPlayer.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		btnEditPlayer.setBounds(56, 317, 124, 31);
 		contentPane.add(btnEditPlayer);
