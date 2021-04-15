@@ -170,7 +170,7 @@ public class Model {
 		ArrayList<Player> playerList3 = new ArrayList<Player>();
 		
 		playerList1.add(Player1);
-		playerList2.add(Player2);
+		playerList1.add(Player2);
 		playerList3.add(Player3);
 		
 		Squad Squad1 = new Squad("H26YZA99", "U18 Squad 1", "U18", playerList1);

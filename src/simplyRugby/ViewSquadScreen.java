@@ -85,20 +85,54 @@ public class ViewSquadScreen extends JFrame {
 		
 		ArrayList<Player> retVal = simplyRugbyController.findPlayerInformation(currentSquad);
 		
-		viewSquadTablePlayerData = new JTable();
-		viewSquadTablePlayerData.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
+		DefaultTableModel model = new DefaultTableModel()
+		{
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		
+		viewSquadTablePlayerData = new JTable(model);
+		
+		model.addColumn("Player Name"); 
+		model.addColumn("Position"); 
+		model.addColumn("Overall Rating");
+		
+		for (Player p : retVal)
+		{
+			
+			int overallSkill = 0;
+			
+			int skillCount = 0;
+			
+			ArrayList<SkillCategory> skillCategories = p.getPlayerSkills();
+			
+			for (SkillCategory sc : skillCategories)
+			{
+				ArrayList<Skill> skill = sc.getCategorySkillList();
+				
+				for (Skill s: skill)
+				{
+					overallSkill += s.getRating();
+					skillCount += 1;
+				}
+				
 			}
-		));
+			
+			overallSkill = overallSkill / skillCount;
+			
+			model.addRow(new Object[]{p.getFirstName() + " " + p.getLastName(), p.getPosition(), overallSkill});
+			
+			
+		}
+		
 		scrollPane.setViewportView(viewSquadTablePlayerData);
 		
 		JButton viewSquadBtnViewSelectedPlayer = new JButton("View Selected Player");
 		viewSquadBtnViewSelectedPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		viewSquadBtnViewSelectedPlayer.setBounds(146, 310, 153, 36);
+		viewSquadBtnViewSelectedPlayer.setBounds(116, 310, 183, 36);
 		contentPane.add(viewSquadBtnViewSelectedPlayer);
 		
 		JButton viewSquadBtnEditSquad = new JButton("Edit Squad");

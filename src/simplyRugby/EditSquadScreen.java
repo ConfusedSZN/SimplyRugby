@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
@@ -173,14 +174,49 @@ public class EditSquadScreen extends JFrame {
 		scrollPane.setBounds(35, 214, 539, 136);
 		contentPane.add(scrollPane);
 		
-		editSquadTablePlayerData = new JTable();
-		editSquadTablePlayerData.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Player Name", "Position", "Rating"
+		ArrayList<Player> retVal = simplyRugbyController.findPlayerInformation(currentSquad);
+		
+		DefaultTableModel model = new DefaultTableModel()
+				{
+					@Override
+				    public boolean isCellEditable(int row, int column) {
+				       //all cells false
+				       return false;
+				    }
+				};
+
+		editSquadTablePlayerData = new JTable(model);
+		
+		model.addColumn("Player Name"); 
+		model.addColumn("Position"); 
+		model.addColumn("Overall Rating");
+		
+		for (Player p : retVal)
+		{
+			
+			int overallSkill = 0;
+			
+			int skillCount = 0;
+			
+			ArrayList<SkillCategory> skillCategories = p.getPlayerSkills();
+			
+			for (SkillCategory sc : skillCategories)
+			{
+				ArrayList<Skill> skill = sc.getCategorySkillList();
+				
+				for (Skill s: skill)
+				{
+					overallSkill += s.getRating();
+					skillCount += 1;
+				}
+				
 			}
-		));
+			
+			overallSkill = overallSkill / skillCount;
+			
+			model.addRow(new Object[]{p.getFirstName() + " " + p.getLastName(), p.getPosition(), overallSkill});
+		}
+		
 		scrollPane.setViewportView(editSquadTablePlayerData);
 	}
 }
