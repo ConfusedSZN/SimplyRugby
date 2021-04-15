@@ -76,6 +76,16 @@ public class Controller {
 				
 	}
 	
+	public void displayViewPlayer(Coach coach, String playerMemberID)
+	{
+		
+		Player currentPlayer = findSpecificPlayerInformation(playerMemberID, findSquad(coach));
+		
+		ViewPlayerScreen viewPlayerScreen;
+		viewPlayerScreen = new ViewPlayerScreen(coach, currentPlayer, this);
+		viewPlayerScreen.setVisible(true);
+	}
+	
 	public boolean authenticateUser(String username, String password)
 	{
 		
@@ -140,7 +150,26 @@ public class Controller {
 		return currentSquad;
 	}
 	
-	public ArrayList<Player> findPlayerInformation(Squad squad)
+	public Player findSpecificPlayerInformation(String playerMemberID, Squad squad)
+	{
+		
+		ArrayList<Player> playerInformation = findAllPlayerInformation(squad);
+		
+		 Player retVal = null;
+		
+		for (Player p: playerInformation)
+		{
+			 if (p.getMemberID().equals(playerMemberID))
+			 {
+				retVal = p;
+			 }
+		}
+		
+		return retVal;
+		
+	}
+	
+	public ArrayList<Player> findAllPlayerInformation(Squad squad)
 	{
 		
 		ArrayList<Player> retVal = squad.getPlayerList();

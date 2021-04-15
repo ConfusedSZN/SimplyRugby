@@ -116,10 +116,12 @@ public class Model {
 		Skill Skill1 = new Skill("Speed", 33);
 		Skill Skill2 = new Skill("Decision Making", 66);
 		Skill Skill3 = new Skill("Place Kick", 99);
+		Skill Skill4 = new Skill("Stamina", 66);
 		
 		skillList1.add(Skill1);
 		skillList2.add(Skill2);
 		skillList3.add(Skill3);
+		skillList1.add(Skill4);
 		
 		/**
 		 * Data prepopulation for skill categories
@@ -134,7 +136,15 @@ public class Model {
 		SkillCategory Category3 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList3);
 	
 		categoryList1.add(Category1);
+		categoryList1.add(Category2);
+		categoryList1.add(Category3);
+		
+		categoryList2.add(Category1);
 		categoryList2.add(Category2);
+		categoryList2.add(Category3);
+		
+		categoryList3.add(Category3);
+		categoryList3.add(Category3);
 		categoryList3.add(Category3);
 		
 		/**

@@ -1,18 +1,23 @@
 package simplyRugby;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewPlayerScreen extends JFrame {
 
@@ -21,7 +26,7 @@ public class ViewPlayerScreen extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,11 +42,18 @@ public class ViewPlayerScreen extends JFrame {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the frame.
+	 * @param currentPlayer 
+	 * @param coach 
+	 * @param control 
 	 */
-	public ViewPlayerScreen() {
+	public ViewPlayerScreen(Coach coachObj, Player playerObj, Controller control) {
+		Coach currentUser = coachObj;
+		Player currentPlayer = playerObj;
+		Controller simplyRugbyController = control;
+		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -54,28 +66,85 @@ public class ViewPlayerScreen extends JFrame {
 		scrollPane.setBounds(251, 113, 300, 235);
 		contentPane.add(scrollPane);
 		
-		viewPlayerTableDisplaySkills = new JTable();
-		viewPlayerTableDisplaySkills.setFont(new Font("Times New Roman", Font.PLAIN, 11));
-		viewPlayerTableDisplaySkills.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Skill Category", "Skill Name", "Rating"
+		DefaultTableModel model = new DefaultTableModel()
+		{
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
+		
+		viewPlayerTableDisplaySkills = new JTable(model);
+		
+		model.addColumn("Skill Category");
+		model.addColumn("Skill Name");
+		model.addColumn("Rating");
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			
+			ArrayList<Skill> skill = sc.getCategorySkillList();
+				
+			String currentSkillName = null;
+			int currentSkillRating = 0;
+			
+			for (Skill s: skill)
+			{
+				currentSkillName = s.getSkillName();
+				currentSkillRating = s.getRating();
+				model.addRow(new Object[]{sc.getCategoryName(), currentSkillName , currentSkillRating});
 			}
-		));
+			
+		}
 		scrollPane.setViewportView(viewPlayerTableDisplaySkills);
 		
 		JButton viewPlayerBtnViewNotes = new JButton("View Notes on Selected Category");
+		viewPlayerBtnViewNotes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int column = 0;
+				
+				int row = viewPlayerTableDisplaySkills.getSelectedRow();
+				
+				String msgContainer = null;
+				
+				String categoryName = viewPlayerTableDisplaySkills.getModel().getValueAt(row, column).toString();
+				
+				for (SkillCategory sc : currentPlayer.getPlayerSkills())
+				{
+					
+					if (sc.getCategoryName().equals(categoryName))
+					{
+						msgContainer = sc.getCategoryNotes();
+					}
+					
+				}
+	
+				JTextArea msg = new JTextArea(msgContainer);
+				msg.setLineWrap(true);
+				msg.setWrapStyleWord(true);
+				msg.setEditable(false);
+				JScrollPane MsgScrollPane = new JScrollPane(msg);
+				JOptionPane.showMessageDialog(null, MsgScrollPane);
+			}
+		});
 		viewPlayerBtnViewNotes.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		viewPlayerBtnViewNotes.setBounds(294, 66, 214, 36);
 		contentPane.add(viewPlayerBtnViewNotes);
 		
-		JLabel viewPlayerLblHeader = new JLabel("Viewing {Player Name}");
+		JLabel viewPlayerLblHeader = new JLabel("Viewing " + currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
 		viewPlayerLblHeader.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		viewPlayerLblHeader.setBounds(20, 11, 356, 30);
 		contentPane.add(viewPlayerLblHeader);
 		
 		JButton viewPlayerBtnReturn = new JButton("Return to Menu");
+		viewPlayerBtnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displayMenu(currentUser);
+			}
+		});
 		viewPlayerBtnReturn.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		viewPlayerBtnReturn.setBounds(439, 14, 124, 31);
 		contentPane.add(viewPlayerBtnReturn);
@@ -85,9 +154,9 @@ public class ViewPlayerScreen extends JFrame {
 		viewPlayerLblHeader2.setBounds(26, 69, 154, 30);
 		contentPane.add(viewPlayerLblHeader2);
 		
-		JLabel viewPlayerLblPlayerIDTooltip = new JLabel("Player ID:");
+		JLabel viewPlayerLblPlayerIDTooltip = new JLabel("Player Scrums ID:");
 		viewPlayerLblPlayerIDTooltip.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		viewPlayerLblPlayerIDTooltip.setBounds(26, 113, 63, 24);
+		viewPlayerLblPlayerIDTooltip.setBounds(26, 113, 110, 24);
 		contentPane.add(viewPlayerLblPlayerIDTooltip);
 		
 		JLabel viewPlayerLblPositionTooltip = new JLabel("Position:");
@@ -105,22 +174,22 @@ public class ViewPlayerScreen extends JFrame {
 		viewPlayerLblECNumberTooltip.setBounds(26, 258, 207, 24);
 		contentPane.add(viewPlayerLblECNumberTooltip);
 		
-		JLabel viewPlayerLblPlayerID = new JLabel("{PlayerID}");
+		JLabel viewPlayerLblPlayerID = new JLabel(currentPlayer.getScrumsID());
 		viewPlayerLblPlayerID.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		viewPlayerLblPlayerID.setBounds(26, 134, 154, 24);
+		viewPlayerLblPlayerID.setBounds(26, 134, 207, 24);
 		contentPane.add(viewPlayerLblPlayerID);
 		
-		JLabel viewPlayerLblPosition = new JLabel("{position}");
+		JLabel viewPlayerLblPosition = new JLabel(currentPlayer.getPosition());
 		viewPlayerLblPosition.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-		viewPlayerLblPosition.setBounds(26, 182, 154, 24);
+		viewPlayerLblPosition.setBounds(26, 182, 215, 24);
 		contentPane.add(viewPlayerLblPosition);
 		
-		JLabel viewPlayerLblECName = new JLabel("{Emergency Contact Name}");
+		JLabel viewPlayerLblECName = new JLabel(currentPlayer.getEmergencyContactName());
 		viewPlayerLblECName.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		viewPlayerLblECName.setBounds(26, 234, 207, 24);
 		contentPane.add(viewPlayerLblECName);
 		
-		JLabel viewPlayerLblECNumber = new JLabel("{Emergency Contact Number}");
+		JLabel viewPlayerLblECNumber = new JLabel(currentPlayer.getEmergencyContactNo());
 		viewPlayerLblECNumber.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		viewPlayerLblECNumber.setBounds(26, 282, 214, 24);
 		contentPane.add(viewPlayerLblECNumber);

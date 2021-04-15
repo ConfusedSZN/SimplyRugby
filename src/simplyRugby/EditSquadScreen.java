@@ -50,7 +50,6 @@ public class EditSquadScreen extends JFrame {
 	 * @param coach 
 	 */
 	public EditSquadScreen(Coach coachObj, Squad squadObj, Controller control) {
-		setResizable(false);
 		Coach currentUser = coachObj;
 		Squad currentSquad = squadObj;
 		Controller simplyRugbyController = control;
@@ -60,6 +59,7 @@ public class EditSquadScreen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		setResizable(false);
 		
 		JButton editSquadBtnReturn = new JButton("Return to Menu");
 		editSquadBtnReturn.addActionListener(new ActionListener() {
@@ -174,7 +174,7 @@ public class EditSquadScreen extends JFrame {
 		scrollPane.setBounds(35, 214, 539, 136);
 		contentPane.add(scrollPane);
 		
-		ArrayList<Player> retVal = simplyRugbyController.findPlayerInformation(currentSquad);
+		ArrayList<Player> retVal = simplyRugbyController.findAllPlayerInformation(currentSquad);
 		
 		DefaultTableModel model = new DefaultTableModel()
 				{
