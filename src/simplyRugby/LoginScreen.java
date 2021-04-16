@@ -23,7 +23,6 @@ public class LoginScreen extends JFrame {
 	private JPanel contentPane;
 	private JPasswordField loginPasswordField;
 	private JTextField loginTextFieldUsername; 
-	private Controller simplyRugbyController;
 
 	/**
 	 * Launch the application.
@@ -49,11 +48,11 @@ public class LoginScreen extends JFrame {
 	 * @param controller 
 	 */
 	public LoginScreen(Controller control) {
-		simplyRugbyController = control;
+		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(660, 340, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);

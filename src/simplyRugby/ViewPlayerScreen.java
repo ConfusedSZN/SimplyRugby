@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class ViewPlayerScreen extends JFrame {
@@ -55,17 +57,31 @@ public class ViewPlayerScreen extends JFrame {
 		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(660, 340, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		addWindowListener(new WindowAdapter() {
+			  public void windowClosing(WindowEvent e) {
+			    int confirmed = JOptionPane.showConfirmDialog(null, 
+			        "Are you sure you want to exit to the main menu?", "Return to Menu?",
+			        JOptionPane.YES_NO_OPTION);
+
+			    if (confirmed == JOptionPane.YES_OPTION) {
+			    simplyRugbyController.displayMenu(currentUser);
+			    dispose();
+			      
+			    } else 
+			    {
+			    	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			    }
+			  }
+			});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(251, 113, 300, 235);
 		contentPane.add(scrollPane);
-		
 		DefaultTableModel model = new DefaultTableModel()
 		{
 			@Override

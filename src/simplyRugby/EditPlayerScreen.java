@@ -17,6 +17,8 @@ import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class EditPlayerScreen extends JFrame {
@@ -57,11 +59,29 @@ public class EditPlayerScreen extends JFrame {
 		Controller simplyRugbyController = control;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(660, 340, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		
+		addWindowListener(new WindowAdapter() {
+			  public void windowClosing(WindowEvent e) {
+			    int confirmed = JOptionPane.showConfirmDialog(null, 
+			        "Are you sure you want to exit to the main menu? \n Your changes will be saved.", "Return to Menu?",
+			        JOptionPane.YES_NO_OPTION);
+
+			    if (confirmed == JOptionPane.YES_OPTION) {
+			    simplyRugbyController.requestSave();
+			    simplyRugbyController.displayMenu(currentUser);
+			    dispose();
+			      
+			    } else 
+			    { 
+			    	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			    }
+			  }
+			});
 		
 		JButton editPlayerBtnReturn = new JButton("Return to Menu");
 		editPlayerBtnReturn.addActionListener(new ActionListener() {
@@ -244,8 +264,8 @@ public class EditPlayerScreen extends JFrame {
 			    		
 			    		if (retVal == true)
 			    		{
-			    			dispose();
 			    			simplyRugbyController.displayEditPlayer(coachObj, currentPlayer);
+			    			dispose();
 			    			JOptionPane.showMessageDialog(contentPane, "Yay! You have created a new Skill!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
 			    		} else 
 			    		{
@@ -271,6 +291,22 @@ public class EditPlayerScreen extends JFrame {
 		contentPane.add(editPlayerbtnEditCategoryNote);
 		
 		JButton editPlayerBtnSaveChanges = new JButton("Save Changes");
+		editPlayerBtnSaveChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentPlayer.setPosition(editPlayerComboBoxPlayerPosition.getSelectedItem().toString());  
+				
+				boolean saveStatus = simplyRugbyController.requestSave();
+				
+				if (saveStatus == true)
+				{
+					JOptionPane.showMessageDialog(contentPane, "Changes Saved Successfully", "Save", JOptionPane.INFORMATION_MESSAGE);
+				} else
+				{
+					JOptionPane.showMessageDialog(contentPane, "There has been an issue saving your changes, please try again.", "Save", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+		
 		editPlayerBtnSaveChanges.setBounds(44, 303, 152, 36);
 		contentPane.add(editPlayerBtnSaveChanges);
 		
