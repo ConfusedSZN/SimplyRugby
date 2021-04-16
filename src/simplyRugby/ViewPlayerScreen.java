@@ -75,28 +75,10 @@ public class ViewPlayerScreen extends JFrame {
 		    }
 		};
 		
+		model = simplyRugbyController.displayPlayerSkills(currentPlayer);
+		
 		viewPlayerTableDisplaySkills = new JTable(model);
-		
-		model.addColumn("Skill Category");
-		model.addColumn("Skill Name");
-		model.addColumn("Rating");
-		
-		for (SkillCategory sc : currentPlayer.getPlayerSkills())
-		{
-			
-			ArrayList<Skill> skill = sc.getCategorySkillList();
-				
-			String currentSkillName = null;
-			int currentSkillRating = 0;
-			
-			for (Skill s: skill)
-			{
-				currentSkillName = s.getSkillName();
-				currentSkillRating = s.getRating();
-				model.addRow(new Object[]{sc.getCategoryName(), currentSkillName , currentSkillRating});
-			}
-			
-		}
+	
 		scrollPane.setViewportView(viewPlayerTableDisplaySkills);
 		
 		JButton viewPlayerBtnViewNotes = new JButton("View Notes on Selected Category");
@@ -107,20 +89,10 @@ public class ViewPlayerScreen extends JFrame {
 				
 				int row = viewPlayerTableDisplaySkills.getSelectedRow();
 				
-				String msgContainer = null;
-				
 				String categoryName = viewPlayerTableDisplaySkills.getModel().getValueAt(row, column).toString();
 				
-				for (SkillCategory sc : currentPlayer.getPlayerSkills())
-				{
-					
-					if (sc.getCategoryName().equals(categoryName))
-					{
-						msgContainer = sc.getCategoryNotes();
-					}
-					
-				}
-	
+				String msgContainer = simplyRugbyController.getSkillCategoryNote(currentPlayer, categoryName);
+				
 				JTextArea msg = new JTextArea(msgContainer);
 				msg.setLineWrap(true);
 				msg.setWrapStyleWord(true);

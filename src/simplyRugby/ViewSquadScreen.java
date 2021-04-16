@@ -83,8 +83,6 @@ public class ViewSquadScreen extends JFrame {
 		scrollPane.setBounds(36, 93, 528, 202);
 		contentPane.add(scrollPane);
 		
-		ArrayList<Player> retVal = simplyRugbyController.findAllPlayerInformation(currentSquad);
-		
 		DefaultTableModel model = new DefaultTableModel()
 		{
 			@Override
@@ -94,40 +92,10 @@ public class ViewSquadScreen extends JFrame {
 		    }
 		};
 		
+		model = simplyRugbyController.displaySquadPlayers(currentSquad);
+		
 		viewSquadTablePlayerData = new JTable(model);
-		
-		model.addColumn("Player Member ID"); 
-		model.addColumn("Player Name"); 
-		model.addColumn("Position"); 
-		model.addColumn("Overall Rating");
-		
-		for (Player p : retVal)
-		{
-			
-			int overallSkill = 0;
-			
-			int skillCount = 0;
-			
-			ArrayList<SkillCategory> skillCategories = p.getPlayerSkills();
-			
-			for (SkillCategory sc : skillCategories)
-			{
-				ArrayList<Skill> skill = sc.getCategorySkillList();
-				
-				for (Skill s: skill)
-				{
-					overallSkill += s.getRating();
-					skillCount += 1;
-				}
-				
-			}
-			
-			overallSkill = overallSkill / skillCount;
-			
-			model.addRow(new Object[]{p.getMemberID(), p.getFirstName() + " " + p.getLastName(), p.getPosition(), overallSkill});
-			
-		}
-		
+
 		scrollPane.setViewportView(viewSquadTablePlayerData);
 		
 		JButton viewSquadBtnViewSelectedPlayer = new JButton("View Selected Player");

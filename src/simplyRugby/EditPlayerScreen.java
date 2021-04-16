@@ -63,6 +63,8 @@ public class EditPlayerScreen extends JFrame {
 		JButton editPlayerBtnReturn = new JButton("Return to Menu");
 		editPlayerBtnReturn.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		editPlayerBtnReturn.setBounds(457, 20, 124, 31);
+		dispose();
+		simplyRugbyController.displayMenu(currentUser);
 		contentPane.add(editPlayerBtnReturn);
 		
 		JLabel EditPlayerLblHeader = new JLabel("Editing " + currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
@@ -73,7 +75,7 @@ public class EditPlayerScreen extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(212, 75, 360, 271);
 		contentPane.add(scrollPane);
-		
+
 		DefaultTableModel model = new DefaultTableModel()
 		{
 			@Override
@@ -83,29 +85,9 @@ public class EditPlayerScreen extends JFrame {
 		    }
 		};
 		
+		model = simplyRugbyController.displayPlayerSkills(currentPlayer);
+		
 		editPlayerTableSkillData = new JTable(model);
-		
-		model.addColumn("Skill Category");
-		model.addColumn("Skill Name");
-		model.addColumn("Rating");
-		
-		for (SkillCategory sc : currentPlayer.getPlayerSkills())
-		{
-			
-			ArrayList<Skill> skill = sc.getCategorySkillList();
-				
-			String currentSkillName = null;
-			int currentSkillRating = 0;
-			
-			for (Skill s: skill)
-			{
-				currentSkillName = s.getSkillName();
-				currentSkillRating = s.getRating();
-				model.addRow(new Object[]{sc.getCategoryName(), currentSkillName , currentSkillRating});
-			}
-			
-		}
-		
 		
 		scrollPane.setViewportView(editPlayerTableSkillData);
 		

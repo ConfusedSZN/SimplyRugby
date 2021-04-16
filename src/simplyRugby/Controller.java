@@ -3,6 +3,9 @@ package simplyRugby;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import BCrypt.*;
 
 public class Controller {
@@ -186,4 +189,102 @@ public class Controller {
 		return retVal;
 
 	}
+	
+	public DefaultTableModel displaySquadPlayers(Squad squadObj)
+	{
+		Squad currentSquad = squadObj;
+		
+		DefaultTableModel model = new DefaultTableModel();
+		
+		ArrayList<Player> players = findAllPlayerInformation(currentSquad);
+
+		model.addColumn("Player Member ID"); 
+		model.addColumn("Player Name"); 
+		model.addColumn("Position"); 
+		model.addColumn("Overall Rating");
+		
+		for (Player p : players)
+		{
+			
+			int overallSkill = 0;
+			
+			int skillCount = 0;
+			
+			ArrayList<SkillCategory> skillCategories = p.getPlayerSkills();
+			
+			for (SkillCategory sc : skillCategories)
+			{
+				ArrayList<Skill> skill = sc.getCategorySkillList();
+				
+				for (Skill s: skill)
+				{
+					overallSkill += s.getRating();
+					skillCount += 1;
+				}
+				
+			}
+			
+			overallSkill = overallSkill / skillCount;
+			
+			model.addRow(new Object[]{p.getMemberID(), p.getFirstName() + " " + p.getLastName(), p.getPosition(), overallSkill});
+			
+		}
+		
+		return model;
+
+	}
+	
+	public DefaultTableModel displayPlayerSkills(Player playerObj)
+	{
+		
+		DefaultTableModel retVal = new DefaultTableModel();
+		
+		Player currentPlayer = playerObj;
+		
+		retVal.addColumn("Skill Category");
+		retVal.addColumn("Skill Name");
+		retVal.addColumn("Rating");
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			
+			ArrayList<Skill> skill = sc.getCategorySkillList();
+				
+			String currentSkillName = null;
+			int currentSkillRating = 0;
+			
+			for (Skill s: skill)
+			{
+				currentSkillName = s.getSkillName();
+				currentSkillRating = s.getRating();
+				retVal.addRow(new Object[]{sc.getCategoryName(), currentSkillName , currentSkillRating});
+			}
+			
+		}
+		
+		return retVal;
+		
+	}
+	
+	public String getSkillCategoryNote(Player playerObj, String categoryName)
+	{
+		
+		Player currentPlayer = playerObj;
+		
+		String retVal = null;
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			
+			if (sc.getCategoryName().equals(categoryName))
+			{
+				retVal = sc.getCategoryNotes();
+			}
+			
+		}
+		
+		return retVal;
+		
+	}
+	
 }
