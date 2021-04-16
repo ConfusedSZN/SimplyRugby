@@ -196,10 +196,66 @@ public class EditPlayerScreen extends JFrame {
 		editPlayerBtnAddSkillToCategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				JFrame popup;
 				
+				popup = new JFrame(); 
 				
+				boolean retVal = false;
 				
+				ArrayList<String> skillCategoryNames = simplyRugbyController.findAllPlayerSkills(currentPlayer);
 				
+				String[] choices = skillCategoryNames.toArray(new String[skillCategoryNames.size()]);
+			    String categoryInput = (String) JOptionPane.showInputDialog(null, "Please choose a category to add a skill to!",
+			        "Choose a Category", JOptionPane.QUESTION_MESSAGE, null,
+			                                                                       
+			        choices, // Array of choices
+			        choices[1]); // Initial choice
+			    
+			    if (categoryInput.trim().isEmpty())
+			    {
+			    	JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't selected a value for the name of the skill category. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    } else 
+			    {
+			    	String skillName = JOptionPane.showInputDialog(popup, "Please enter the name of the new Skill.");
+			    	
+			    	if (skillName.trim().isEmpty())
+			    	{
+			    		JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't inputted a value for the name of the skill. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    	} else
+			    	{
+			    		
+			    		try {
+			    			int skillRating  = Integer.parseInt(JOptionPane.showInputDialog(popup, "Please enter the rating of the new Skill. \n Numbers between 0 - 100 only"));
+			    			
+			    			if (skillRating < 0 || skillRating > 100)
+			    			{
+			    				JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you entered an unexpected number. Please input numbers between 0 - 100 only! \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    			} else 
+			    			{
+			    				 retVal = simplyRugbyController.addSkill(playerObj, categoryInput, skillName, skillRating);
+			    			}
+			    			
+			    			}
+			    			catch(NumberFormatException numError) {
+			    				JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you entered an unexpected character. Please input numbers between 0 - 100 only! \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    			} catch (Exception otherError){
+			    				
+			    			}
+			    		
+			    		if (retVal == true)
+			    		{
+			    			dispose();
+			    			simplyRugbyController.displayEditPlayer(coachObj, currentPlayer);
+			    			JOptionPane.showMessageDialog(contentPane, "Yay! You have created a new Skill!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+			    		} else 
+			    		{
+			    			JOptionPane.showMessageDialog(contentPane, "Uh Oh! That skill already exists! \n Please enter a unique name for the new skill.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    		}
+			    		
+			    	}
+			    	
+			    }
+			    
 			}
 		});
 

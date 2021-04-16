@@ -198,6 +198,22 @@ public class Controller {
 
 	}
 	
+	public ArrayList<String> findAllPlayerSkills(Player playerObj)
+	{
+		
+		ArrayList<String> retVal = new ArrayList<String>();
+		
+		Player currentPlayer = playerObj;
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			retVal.add(sc.getCategoryName());
+		}
+		
+		return retVal;
+		
+	}
+	
 	public DefaultTableModel displaySquadPlayers(Squad squadObj)
 	{
 		Squad currentSquad = squadObj;
@@ -343,13 +359,52 @@ public class Controller {
 	public boolean addSkill(Player playerObj, String categoryName, String skillName, int skillRating)
 	{
 		
-		boolean retVal = false;
+		boolean retVal = true;
+		
+		String newName = skillName;
+		
+		int newRating = skillRating;
 
 		try {
 			
 			Player currentPlayer = playerObj;
 			
+			ArrayList<SkillCategory> currentSkillCategoryList = currentPlayer.getPlayerSkills();
 			
+			Skill newSkill = new Skill(skillName , skillRating);
+			
+			for (SkillCategory sc: currentSkillCategoryList)
+			{
+				if(sc.getCategoryName().toLowerCase().equals(categoryName.toLowerCase()))
+				{
+					
+					ArrayList<Skill> currentSkillList = sc.getCategorySkillList();
+					
+					for (Skill s: currentSkillList)
+					{
+						if (s.getSkillName().toLowerCase().equals(newName))
+						{
+							retVal = false;
+							break;
+						}
+
+					}
+					
+					if (retVal == false)
+					{
+						
+					} else 
+					{
+						currentSkillList.add(newSkill);
+						
+						retVal = true;
+					}
+					
+				}
+				
+				
+				
+			}
 		
 			}
 			catch(Exception e) {
