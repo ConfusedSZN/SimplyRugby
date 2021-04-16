@@ -9,12 +9,15 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EditPlayerScreen extends JFrame {
 
@@ -61,10 +64,14 @@ public class EditPlayerScreen extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton editPlayerBtnReturn = new JButton("Return to Menu");
+		editPlayerBtnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				simplyRugbyController.displayMenu(currentUser);
+			}
+		});
 		editPlayerBtnReturn.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		editPlayerBtnReturn.setBounds(457, 20, 124, 31);
-		dispose();
-		simplyRugbyController.displayMenu(currentUser);
 		contentPane.add(editPlayerBtnReturn);
 		
 		JLabel EditPlayerLblHeader = new JLabel("Editing " + currentPlayer.getFirstName() + " " + currentPlayer.getLastName());
@@ -150,10 +157,52 @@ public class EditPlayerScreen extends JFrame {
 		contentPane.add(editPlayerComboBoxPlayerPosition);
 		
 		JButton editPlayerBtnAddCategory = new JButton("Add Category");
+		editPlayerBtnAddCategory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame popup;
+				
+				popup = new JFrame(); 
+				
+				boolean retVal = false;
+				
+				String categoryName = JOptionPane.showInputDialog(popup, "Please enter the name of the new Skill Category.");
+				
+				if (categoryName.trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't entered a value for the name of the skill category. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				} else
+				{
+					
+					String categoryNote = JOptionPane.showInputDialog(popup, "Please enter a note for the new category: " + categoryName + ".\n Please note this is not required and can be updated later.");
+					
+					retVal = simplyRugbyController.addSkillCategory(playerObj, categoryName, categoryNote);
+					
+					if (retVal == true)
+					{
+						JOptionPane.showMessageDialog(contentPane, "Yay! You have created a new Category!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+					} else 
+					{
+						JOptionPane.showMessageDialog(contentPane, "Uh Oh! That skill category already exists! \n Please enter a unique name for the new category.", "Alert!", JOptionPane.WARNING_MESSAGE);	
+					}
+				}
+				
+			}
+		});
+		
 		editPlayerBtnAddCategory.setBounds(28, 136, 176, 36);
 		contentPane.add(editPlayerBtnAddCategory);
 		
 		JButton editPlayerBtnAddSkillToCategory = new JButton("Add Skill to Category");
+		editPlayerBtnAddSkillToCategory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				
+			}
+		});
+
 		editPlayerBtnAddSkillToCategory.setBounds(28, 176, 176, 36);
 		contentPane.add(editPlayerBtnAddSkillToCategory);
 		

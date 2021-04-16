@@ -98,6 +98,14 @@ public class Controller {
 		
 	}
 	
+	public boolean requestSave()
+	{
+		
+		simplyRugbyModel.saveData();
+		
+		return true;
+	}
+	
 	public boolean authenticateUser(String username, String password)
 	{
 		
@@ -282,6 +290,71 @@ public class Controller {
 			}
 			
 		}
+		
+		return retVal;
+		
+	}
+	
+	public boolean addSkillCategory(Player playerObj, String categoryName, String categoryNote)
+	{
+		
+		boolean retVal = true;
+		
+		Player currentPlayer = playerObj;
+		
+		ArrayList<Skill> placeholderList = new ArrayList<Skill>();
+
+		try {
+			
+			ArrayList<SkillCategory> currentSkillCategoryList = currentPlayer.getPlayerSkills();
+			
+			SkillCategory newCategory = new SkillCategory(categoryName, categoryNote , placeholderList);
+			
+			for (SkillCategory sc: currentSkillCategoryList)
+			{
+				if(sc.getCategoryName().toLowerCase().equals(newCategory.getCategoryName().toLowerCase()))
+				{
+					//Catches the duplicate name
+					retVal = false;
+					break;
+				}
+					
+			}
+			
+			if (retVal == false)
+			{
+				
+			} else 
+			{
+				currentSkillCategoryList.add(newCategory);
+				
+				retVal = true;
+			}
+			
+			}
+			catch(Exception e) {
+			  //  Block of code to handle errors
+			}
+		
+		return retVal;
+		
+	}
+		
+	public boolean addSkill(Player playerObj, String categoryName, String skillName, int skillRating)
+	{
+		
+		boolean retVal = false;
+
+		try {
+			
+			Player currentPlayer = playerObj;
+			
+			
+		
+			}
+			catch(Exception e) {
+			  //  Block of code to handle errors
+			}
 		
 		return retVal;
 		
