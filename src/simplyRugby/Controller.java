@@ -218,7 +218,15 @@ public class Controller {
 	{
 		Squad currentSquad = squadObj;
 		
-		DefaultTableModel model = new DefaultTableModel();
+		DefaultTableModel model = new DefaultTableModel() {
+			
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+			
+		};
 		
 		ArrayList<Player> players = findAllPlayerInformation(currentSquad);
 
@@ -261,7 +269,15 @@ public class Controller {
 	public DefaultTableModel displayPlayerSkills(Player playerObj)
 	{
 		
-		DefaultTableModel retVal = new DefaultTableModel();
+		DefaultTableModel retVal = new DefaultTableModel(){
+			
+			@Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+			
+		};
 		
 		Player currentPlayer = playerObj;
 		
@@ -412,6 +428,38 @@ public class Controller {
 			}
 		
 		return retVal;
+		
+	}
+	
+	public boolean editCategoryNote(Player playerObj, String categoryName, String newValue)
+	{
+		
+		boolean retVal = false;
+		
+		Player currentPlayer = playerObj;
+		
+		String nameOfCategory = categoryName;
+		
+		String newNoteValue = newValue;
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			
+			if (sc.getCategoryName().equals(nameOfCategory))
+			{
+				sc.setCategoryNotes(newNoteValue);
+				retVal = true;
+			}
+			
+		}
+		
+		return retVal;
+
+	}
+	
+	public boolean editSkillRating(Player playerObj, String categoryName, String skillName, int newValue)
+	{
+		return false;
 		
 	}
 	

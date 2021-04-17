@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
@@ -283,10 +284,64 @@ public class EditPlayerScreen extends JFrame {
 		contentPane.add(editPlayerBtnAddSkillToCategory);
 		
 		JButton editPlayerBtnEditSkillRating = new JButton("Edit Skill Rating");
+		editPlayerBtnEditSkillRating.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
 		editPlayerBtnEditSkillRating.setBounds(28, 216, 176, 36);
 		contentPane.add(editPlayerBtnEditSkillRating);
 		
 		JButton editPlayerbtnEditCategoryNote = new JButton("Edit Category Note");
+		editPlayerbtnEditCategoryNote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				boolean retVal = false;
+				
+				int column = 0;
+				
+				int row = editPlayerTableSkillData.getSelectedRow();
+				
+				String titleOfCategory = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+				
+				JFrame popup;
+				
+				popup = new JFrame();
+				
+				String oldNoteValue = simplyRugbyController.getSkillCategoryNote(currentPlayer, titleOfCategory);
+				
+				String newNoteValue = null;
+				
+				JTextArea msg = new JTextArea(oldNoteValue);
+				msg.setLineWrap(true);
+				msg.setWrapStyleWord(true);
+				msg.setEditable(true);
+				JScrollPane MsgScrollPane = new JScrollPane(msg);
+				JOptionPane.showMessageDialog(null, MsgScrollPane);
+				
+				newNoteValue = msg.getText();
+				
+				if (newNoteValue.trim().isEmpty())
+			    {
+			    	JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't inputted an updated value. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    } else 
+			    {
+			    	retVal = simplyRugbyController.editCategoryNote(currentPlayer, titleOfCategory, newNoteValue);
+			    	
+			    	if (retVal == true)
+			    	{
+			    		JOptionPane.showMessageDialog(contentPane, "Yay! You have updated the note value successfully.", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+			    	} else
+			    	{
+			    		JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+			    	}
+			    }
+	
+			}
+		});
+
 		editPlayerbtnEditCategoryNote.setBounds(28, 256, 176, 36);
 		contentPane.add(editPlayerbtnEditCategoryNote);
 		

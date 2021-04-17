@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.EventObject;
 import java.awt.event.ActionEvent;
 
 public class ViewSquadScreen extends JFrame {
@@ -96,15 +97,8 @@ public class ViewSquadScreen extends JFrame {
 		scrollPane.setBounds(36, 93, 528, 202);
 		contentPane.add(scrollPane);
 		
-		DefaultTableModel model = new DefaultTableModel()
-		{
-			@Override
-		    public boolean isCellEditable(int row, int column) {
-		       //all cells false
-		       return false;
-		    }
-		};
-		
+		DefaultTableModel model = new DefaultTableModel();
+
 		model = simplyRugbyController.displaySquadPlayers(currentSquad);
 		
 		viewSquadTablePlayerData = new JTable(model);

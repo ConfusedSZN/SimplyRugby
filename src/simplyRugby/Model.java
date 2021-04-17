@@ -112,16 +112,37 @@ public class Model {
 		ArrayList<Skill> skillList1 = new ArrayList<Skill>();
 		ArrayList<Skill> skillList2 = new ArrayList<Skill>();
 		ArrayList<Skill> skillList3 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList4 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList5 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList6 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList7 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList8 = new ArrayList<Skill>();
+		ArrayList<Skill> skillList9 = new ArrayList<Skill>();
 		
 		Skill Skill1 = new Skill("Speed", 33);
-		Skill Skill2 = new Skill("Decision Making", 66);
-		Skill Skill3 = new Skill("Place Kick", 99);
-		Skill Skill4 = new Skill("Stamina", 66);
+		Skill Skill2 = new Skill("Stamina", 56);
+		Skill Skill3 = new Skill("Tackling", 77);
+		
+		Skill Skill4 = new Skill("Decision Making", 66);
+		Skill Skill5 = new Skill("Support Play", 60);
+		Skill Skill6 = new Skill("Positioning", 88);
+
+		
+		Skill Skill7 = new Skill("Place Kick", 99);
+		Skill Skill8 = new Skill("Spiral Punt", 78);
+		Skill Skill9 = new Skill("End-over-end Kick", 44);
 		
 		skillList1.add(Skill1);
-		skillList2.add(Skill2);
-		skillList3.add(Skill3);
-		skillList1.add(Skill4);
+		skillList2.add(Skill4);
+		skillList3.add(Skill7);
+		
+		skillList4.add(Skill2);
+		skillList5.add(Skill5);
+		skillList6.add(Skill8);
+		
+		skillList7.add(Skill3);
+		skillList8.add(Skill6);
+		skillList9.add(Skill9);
 		
 		/**
 		 * Data prepopulation for skill categories
@@ -130,22 +151,30 @@ public class Model {
 		ArrayList<SkillCategory> categoryList1 = new ArrayList<SkillCategory>();
 		ArrayList<SkillCategory> categoryList2 = new ArrayList<SkillCategory>();
 		ArrayList<SkillCategory> categoryList3 = new ArrayList<SkillCategory>();
-		
+
 		SkillCategory Category1 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList1);
 		SkillCategory Category2 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList2);
 		SkillCategory Category3 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList3);
+		
+		SkillCategory Category4 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList4);
+		SkillCategory Category5 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList5);
+		SkillCategory Category6 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList6);
+		
+		SkillCategory Category7 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList7);
+		SkillCategory Category8 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList8);
+		SkillCategory Category9 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList9);
 	
 		categoryList1.add(Category1);
 		categoryList1.add(Category2);
 		categoryList1.add(Category3);
 		
-		categoryList2.add(Category1);
-		categoryList2.add(Category2);
-		categoryList2.add(Category3);
+		categoryList2.add(Category4);
+		categoryList2.add(Category5);
+		categoryList2.add(Category6);
 		
-		categoryList3.add(Category3);
-		categoryList3.add(Category3);
-		categoryList3.add(Category3);
+		categoryList3.add(Category7);
+		categoryList3.add(Category8);
+		categoryList3.add(Category9);
 		
 		/**
 		 * Data prepopulation for players
