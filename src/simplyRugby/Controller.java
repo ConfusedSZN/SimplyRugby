@@ -459,8 +459,42 @@ public class Controller {
 	
 	public boolean editSkillRating(Player playerObj, String categoryName, String skillName, int newValue)
 	{
-		return false;
 		
+		boolean retVal = false;
+		
+		Player currentPlayer = playerObj;
+		
+		String nameOfCategory = categoryName;
+		
+		String nameOfSkill = skillName;
+		
+		for (SkillCategory sc : currentPlayer.getPlayerSkills())
+		{
+			
+			if (sc.getCategoryName().equals(nameOfCategory))
+			{
+				
+				SkillCategory currentCategory = sc;
+				
+				ArrayList<Skill> skills = sc.getCategorySkillList();
+				
+				for (Skill s: skills)
+				{
+					
+					if (s.getSkillName().equals(nameOfSkill))
+					{
+						
+						s.setRating(newValue);
+						
+						retVal = true;
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		return retVal;
 	}
-	
 }

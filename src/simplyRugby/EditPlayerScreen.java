@@ -287,8 +287,63 @@ public class EditPlayerScreen extends JFrame {
 		editPlayerBtnEditSkillRating.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				int column = 2;
+				
+				int row = editPlayerTableSkillData.getSelectedRow();
+				
+				String skillRatingString = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+				
+				column = 1;
+				
+				String skillName = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+				
+				column = 0;
+				
+				String skillCategoryName = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+
+				JFrame popup;
+				
+				popup = new JFrame(); 
+				
+				String stringNewRatingValue = null;
+				
+				stringNewRatingValue = JOptionPane.showInputDialog(popup, "Please enter the new value for the " + skillName + " skill.", skillRatingString);
+				
+				try {
+					
+					int newRatingValue = Integer.parseInt(stringNewRatingValue);
+					
+					if (newRatingValue < 0 || newRatingValue > 100)
+					{
+						JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you have entered an invalid number. \n Please try again entering numbers between 0 and 100 only.", "Alert!", JOptionPane.WARNING_MESSAGE);
+					} else
+					{
+						boolean retVal = simplyRugbyController.editSkillRating(currentPlayer, skillCategoryName , skillName , newRatingValue);
+						
+						
+						if (retVal == true)
+						{
+							simplyRugbyController.displayEditPlayer(coachObj, currentPlayer);
+			    			dispose();
+			    			JOptionPane.showMessageDialog(contentPane, "Yay! You have updated the rating.", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+						} else
+						{
+							JOptionPane.showMessageDialog(contentPane, "Uh Oh! An unexpected error has occured. Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);	
+						}
+					}
+					
+				} catch (NumberFormatException numEx)
+				{
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't entered a number. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				} catch (NullPointerException nullEx)
+				{
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't inputted an updated value. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				} catch (Exception otherEx){
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an unexpected error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				}
 				
 				
+			
 			}
 		});
 		editPlayerBtnEditSkillRating.setBounds(28, 216, 176, 36);
@@ -305,10 +360,6 @@ public class EditPlayerScreen extends JFrame {
 				int row = editPlayerTableSkillData.getSelectedRow();
 				
 				String titleOfCategory = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
-				
-				JFrame popup;
-				
-				popup = new JFrame();
 				
 				String oldNoteValue = simplyRugbyController.getSkillCategoryNote(currentPlayer, titleOfCategory);
 				
@@ -338,7 +389,6 @@ public class EditPlayerScreen extends JFrame {
 			    		JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
 			    	}
 			    }
-	
 			}
 		});
 
