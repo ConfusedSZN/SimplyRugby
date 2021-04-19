@@ -206,7 +206,6 @@ public class EditPlayerScreen extends JFrame {
 						JOptionPane.showMessageDialog(contentPane, "Uh Oh! That skill category already exists! \n Please enter a unique name for the new category.", "Alert!", JOptionPane.WARNING_MESSAGE);	
 					}
 				}
-				
 			}
 		});
 		
@@ -271,12 +270,9 @@ public class EditPlayerScreen extends JFrame {
 			    		} else 
 			    		{
 			    			JOptionPane.showMessageDialog(contentPane, "Uh Oh! That skill already exists! \n Please enter a unique name for the new skill.", "Alert!", JOptionPane.WARNING_MESSAGE);
-			    		}
-			    		
-			    	}
-			    	
+			    		}	
+			    	}   	
 			    }
-			    
 			}
 		});
 
@@ -315,11 +311,13 @@ public class EditPlayerScreen extends JFrame {
 					
 					if (newRatingValue < 0 || newRatingValue > 100)
 					{
+						
 						JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you have entered an invalid number. \n Please try again entering numbers between 0 and 100 only.", "Alert!", JOptionPane.WARNING_MESSAGE);
+					
 					} else
 					{
-						boolean retVal = simplyRugbyController.editSkillRating(currentPlayer, skillCategoryName , skillName , newRatingValue);
 						
+						boolean retVal = simplyRugbyController.editSkillRating(currentPlayer, skillCategoryName , skillName , newRatingValue);
 						
 						if (retVal == true)
 						{
@@ -342,8 +340,6 @@ public class EditPlayerScreen extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an unexpected error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
 				}
 				
-				
-			
 			}
 		});
 		editPlayerBtnEditSkillRating.setBounds(28, 216, 176, 36);

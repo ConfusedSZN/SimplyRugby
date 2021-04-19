@@ -33,7 +33,7 @@ public class Controller {
 			SplashScreen.splashProgressBar.setStringPainted(true);
 		}
 		simplyRugbyModel.loadData();
-		splashScreen.setVisible(false);
+		splashScreen.dispose();
 		loginScreen.setVisible(true);
 	}
 	
@@ -69,14 +69,6 @@ public class Controller {
 		ViewSquadScreen squadViewScreen;
 		squadViewScreen = new ViewSquadScreen(coach, findSquad(coach), this);
 		squadViewScreen.setVisible(true);
-	}
-	
-	public void displaySquadEdit(Coach coach)
-	{
-		EditSquadScreen squadEditScreen;
-		squadEditScreen = new EditSquadScreen(coach, findSquad(coach), this);
-		squadEditScreen.setVisible(true);
-				
 	}
 	
 	public void displayViewPlayer(Coach coach, String playerMemberID)
@@ -473,8 +465,6 @@ public class Controller {
 			
 			if (sc.getCategoryName().equals(nameOfCategory))
 			{
-				
-				SkillCategory currentCategory = sc;
 				
 				ArrayList<Skill> skills = sc.getCategorySkillList();
 				

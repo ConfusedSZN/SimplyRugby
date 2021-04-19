@@ -121,19 +121,8 @@ public class ViewSquadScreen extends JFrame {
 			}
 		});
 		viewSquadBtnViewSelectedPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		viewSquadBtnViewSelectedPlayer.setBounds(116, 310, 183, 36);
+		viewSquadBtnViewSelectedPlayer.setBounds(210, 306, 183, 36);
 		contentPane.add(viewSquadBtnViewSelectedPlayer);
-		
-		JButton viewSquadBtnEditSquad = new JButton("Edit Squad");
-		viewSquadBtnEditSquad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				simplyRugbyController.displaySquadEdit(currentUser);
-			}
-		});
-		viewSquadBtnEditSquad.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		viewSquadBtnEditSquad.setBounds(315, 310, 153, 36);
-		contentPane.add(viewSquadBtnEditSquad);
 		
 		JPanel outlineRectangle = new JPanel();
 		outlineRectangle.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
