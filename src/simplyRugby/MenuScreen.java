@@ -52,9 +52,8 @@ public class MenuScreen extends JFrame {
 	 * Create the frame.
 	 * @param coachObj 
 	 */
-	public MenuScreen(Coach coachObj, Squad squadObj, Controller control) {
+	public MenuScreen(Coach coachObj, Controller control) {
 		Coach currentUser = coachObj;
-		Squad currentSquad = squadObj;
 		Controller simplyRugbyController = control;
 		setTitle("Simply Rugby");
 		setResizable(false);
