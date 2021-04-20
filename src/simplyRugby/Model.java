@@ -1,23 +1,78 @@
 package simplyRugby;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+/**
+ * <H1> Class - Model</H1>
+ * This class is responsible for holding information and saving information linked to the Simply Rugby Club.
+ * 
+ * @author Alan Miller
+ * @since 06/04/2021
+ * @version 1.0
+ */
 
+/**
+ * Imports the Java IO File Input Stream that is used during the data loading process.
+ */
+import java.io.FileInputStream;
+/**
+ * Imports the Java IO File Not Found Exception that is used to catch errors during the data loading process.
+ */
+import java.io.FileNotFoundException;
+/**
+ * Imports the Java IO File Output Stream that is used during the saving process.
+ */
+import java.io.FileOutputStream;
+/**
+ * Imports the Java IO Exception handler that is used to catch errors during the loading process.
+ */
+import java.io.IOException;
+/**
+ * Imports Java IO Object Input Stream that is used during the loading process.
+ */
+import java.io.ObjectInputStream;
+/**
+ * Imports Java IO Object Output Stream that is used during the saving process.
+ */
+import java.io.ObjectOutputStream;
+/**
+ * Imports Java Text ParseException that is used to catch Parse Exceptions in the data pre population process.
+ */
+import java.text.ParseException;
+/**
+ * Imports the Java Text SimpleDataFormat which is used during the data pre population process.
+ */
+import java.text.SimpleDateFormat;
+/**
+ * Imports the Java ArrayList utility that is used to store the list of the coaches and squad in the class.
+ */
+import java.util.ArrayList;
+/**
+ * Imports the Java Date Utility that is used in data prepopulation.
+ */
+import java.util.Date;
+/**
+ * Imports all of the BCrypt functions, BCrypt is a password hashing function that will be used during the data prepopulation process. 
+ */
 import BCrypt.BCrypt;
 
+/**
+ * <p>
+ * Model class that will be used by the controller to load and save data.
+ *
+ */
 public class Model {
 
+	/**
+	 * Declares and Initialises the coachData array list that holds data about coaches in the system.
+	 */
 	private ArrayList<Coach> coachData = new ArrayList<Coach>();
+	/**
+	 * Declares and initalises the squadData array list that holds data about squads within the system.
+	 */
 	private ArrayList<Squad> squadData = new ArrayList<Squad>();
 	
+	/**
+	 * Model Constructor that is used upon application start to load the data for the system.
+	 */
 	public Model()
 	{
 		loadData();
@@ -224,6 +279,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the current coachData list and returns it.
 	 * @return the coachData
 	 */
 	public ArrayList<Coach> getCoachData() {
@@ -231,6 +287,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the coachData list parameter passed in and sets it to this instances coachData list.
 	 * @param coachData the coachData to set
 	 */
 	public void setCoachData(ArrayList<Coach> coachData) {
@@ -238,6 +295,7 @@ public class Model {
 	}
 
 	/**
+	 * Gets the current squadData list and returns it.
 	 * @return the squadData
 	 */
 	public ArrayList<Squad> getSquadData() {
@@ -246,6 +304,7 @@ public class Model {
 
 
 	/**
+	 * Gets the squadData list parameter passed in and sets it to this instances squadData list.
 	 * @param squadData the squadData to set
 	 */
 	public void setSquadData(ArrayList<Squad> squadData) {

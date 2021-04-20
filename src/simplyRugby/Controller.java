@@ -68,7 +68,7 @@ public class Controller {
 		/**
 		 * Creates and stores a new SplashScreen that is displayed to the user.
 		 */
-		splashScreen = new SplashScreen(this);
+		splashScreen = new SplashScreen();
 		/**
 		 * Sets the splash screen to visible.
 		 */
