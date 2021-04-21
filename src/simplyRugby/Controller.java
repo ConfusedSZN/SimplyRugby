@@ -721,6 +721,7 @@ public class Controller {
 			/**
 			 * Calculates the average of the players skills and outputs them as the overallSkill variable to be displayed in the model.
 			 */
+	
 			overallSkill = overallSkill / skillCount;
 			
 			/**

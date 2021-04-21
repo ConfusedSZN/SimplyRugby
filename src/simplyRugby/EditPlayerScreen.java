@@ -243,8 +243,8 @@ public class EditPlayerScreen extends JFrame {
 		 * Then, using a switch statement, the currentPlayer position is obtained and then then index of the comboBox is set to that value.
 		 */
 		JComboBox editPlayerComboBoxPlayerPosition = new JComboBox();
-		editPlayerComboBoxPlayerPosition.setModel(new DefaultComboBoxModel(new String[] {"Loosehead Prop", "Hooker", "Tighthead Prop", "Second Row", "Blindside Flanker", "Openside Flanker"
-				, "Number 8", "Scrum Half", "Fly Half", "Inside Centre", "Outside Centre", "Left Wing", "Right Wing", "Full Back"}));
+		editPlayerComboBoxPlayerPosition.setModel(new DefaultComboBoxModel(new String[] {"Loose Head Prop", "Hooker", "Tight Head Prop", "Left Lock", "Right Lock",
+				"Blind Side Flanker", "Open Side Flanker", "Number 8", "Scrum Half", "Stand Off", "Left Wing", "Inside Centre", "Outside Centre", "Right Wing", "Full Back"}));
 		switch(currentPlayer.getPosition()) {
 		  case "Loosehead Prop":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(0);
@@ -255,38 +255,41 @@ public class EditPlayerScreen extends JFrame {
 		  case "Tighthead Prop":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(2);
 		    break;
-		  case "Second Row":
+		  case "Left Lock":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(3);
 		    break;
-		  case "Blindside Flanker":
+		  case "Right Lock":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(4);
 		    break;
-		  case "Openside Flanker":
+		  case "Blind Side Flanker":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(5);
 		    break;
-		  case "Number 8":
+		  case "Open Side Flanker":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(6);
 		    break;
-		  case "Scrum Half":
+		  case "Number 8":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(7);
 		    break;
-		  case "Fly Half":
+		  case "Scrum Half":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(8);
 		    break;
-		  case "Inside Centre":
+		  case "Stand Off":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(9);
 		    break;
-		  case "Outside Centre":
+		  case "Left Wing":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(10);
 		    break;
-		  case "Left Wing":
+		  case "Inside Centre":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(11);
 		    break;
-		  case "Right Wing":
+		  case "Outside Centre":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(12);
 		    break;
-		  case "Full Back":
+		  case "Right Wing":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(13);
+		    break;
+		  case "Full Back":
+			  editPlayerComboBoxPlayerPosition.setSelectedIndex(14);
 		    break;
 		  default:
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(-1);
