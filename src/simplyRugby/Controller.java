@@ -999,9 +999,9 @@ public class Controller {
 	/**
 	 * 
 	 * @param playerObj contains the passed in player object that will be used to add the skill.
-	 * @param categoryName contains the name of the skillCategory that the skill will be added to.
-	 * @param skillName contains the name of the new skill that has been passed in by the view.
-	 * @param skillRating contains the rating of the new skill that has been passed in by the view.
+	 * @param categoryNameInput contains the name of the skillCategory that the skill will be added to.
+	 * @param skillNameInput contains the name of the new skill that has been passed in by the view.
+	 * @param skillRatingInput contains the rating of the new skill that has been passed in by the view.
 	 * @return retVal which contains a true or false value that is used by the view to display error or success messages.
 	 * <p>
 	 * addSkill Method.
@@ -1205,7 +1205,7 @@ public class Controller {
 	 * @param playerObj is a Player Object that is passed to the method. It holds the Player Object that contains the skill that is to be updated.
 	 * @param categoryName is a string value that is passed to the method. It holds the name of the category that contains the skill that needs to be updated.
 	 * @param skillName is a string value that is passed to the method. It holds the name of the skill that needs to be updated.
-	 * @param newValue is an integer value that is passed to the method. It holds the updated value for the rating.
+	 * @param newValueInput is an integer value that is passed to the method. It holds the updated value for the rating.
 	 * @return retVal is a boolean value that is returned for use by the view for displaying success or error messages.
 	 * <p>
 	 * editSkillRating Method.

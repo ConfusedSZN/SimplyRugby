@@ -109,8 +109,8 @@ public class EditPlayerScreen extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @param squadObj holds the squadObj that has been passed by the controller. 
-	 * @param coachObj holds the coachObj that has been passed by the controller.
+	 * @param coachObj holds the coachObj that has been passed by the controller. 
+	 * @param playerObj holds the playerObj that has been passed by the controller.
 	 * @param control holds the an instance of the controller.
 	 */
 	public EditPlayerScreen(Coach coachObj, Player playerObj, Controller control) {

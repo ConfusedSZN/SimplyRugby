@@ -325,7 +325,7 @@ public class Member implements java.io.Serializable{
 
 	/**
 	 * Gets the DOB parameter passed in and sets it to this instances DOB.
-	 * @param DOB the DOB to set
+	 * @param dOB the DOB to set
 	 */
 	public void setDOB(Date dOB) {
 		DOB = dOB;

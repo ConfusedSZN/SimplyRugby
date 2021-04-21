@@ -68,9 +68,9 @@ public class SkillCategory implements java.io.Serializable{
 	
 	/**
 	 * Constructor sets all variables within the Constructor to the values passed in via arguments.
-	 * @param categoryName 
-	 * @param categoryNotes
-	 * @param categorySkillList
+	 * @param categoryName holds the value of the CategoryName that is to be created.
+	 * @param categoryNotes holds the value of the note that is to be saved within the category.
+	 * @param categorySkillList holds the value of individual skills within the category.
 	 */
 	public SkillCategory(String categoryName, String categoryNotes, ArrayList<Skill> categorySkillList)
 	{
