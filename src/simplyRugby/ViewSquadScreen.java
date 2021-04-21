@@ -91,8 +91,8 @@ public class ViewSquadScreen extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @param squadObj holds the coachObj that has been passed by the controller. 
-	 * @param coachObj holds the squadObj that has been passed by the controller.
+	 * @param squadObj holds the squadObj that has been passed by the controller. 
+	 * @param coachObj holds the coachObj that has been passed by the controller.
 	 * @param control holds the an instance of the controller.
 	 */
 	public ViewSquadScreen(Coach coachObj, Squad squadObj, Controller control) {

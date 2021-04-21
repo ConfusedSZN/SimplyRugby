@@ -19,9 +19,6 @@ import javax.swing.JPanel;
 /**
  * Imports Java Swing Border Empty Border to allow for transparent borders.
  */
-/**
- * Imports the Java Swing JScrollPane that is used a container for the table, this allows the table to be scrollable. 
- */
 import javax.swing.border.EmptyBorder;
 /**
  * Imports Java Swing JButton that allows buttons to be placed within the frame that allow actions to be preformed.
@@ -94,7 +91,7 @@ public class ProfileScreen extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @param coachObj holds the squadObj that has been passed by the controller.
+	 * @param coachObj holds the coachObj that has been passed by the controller.
 	 * @param control holds the an instance of the controller.
 	 */
 	public ProfileScreen(Coach coachObj, Controller control) {
@@ -134,10 +131,6 @@ public class ProfileScreen extends JFrame {
 		 * Sets the content pane to the contentPane that the settings changed for.
 		 */
 		setContentPane(contentPane);
-		/**
-		 * Window listener that is used to display a confirmation message to the user when they attempt to close out of the page.
-		 */
-		
 		/**
 		 * Window listener that is used to display a confirmation message to the user when they attempt to close out of the page.
 		 */
@@ -323,9 +316,9 @@ public class ProfileScreen extends JFrame {
 		/**
 		 * Declares and Initialises a new JPanel outlineRectangle that is used as an outline for the main content of the view.
 		 */
-		JPanel panel = new JPanel();
-		panel.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-		panel.setBounds(6, 53, 568, 299);
-		contentPane.add(panel);
+		JPanel outlineRectangle = new JPanel();
+		outlineRectangle.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
+		outlineRectangle.setBounds(6, 53, 568, 299);
+		contentPane.add(outlineRectangle);
 	}
 }
