@@ -199,39 +199,45 @@ public class ViewPlayerScreen extends JFrame {
 		JButton viewPlayerBtnViewNotes = new JButton("View Notes on Selected Category");
 		viewPlayerBtnViewNotes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/**
-				 * Declares and Initialises the column variable that is used to store the index of the column that information is to be read from.
-				 */
-				int column = 0;
-				
-				/**
-				 * Declares and Initialises the row variable that is used to store the value of the selected row.
-				 */
-				int row = viewPlayerTableDisplaySkills.getSelectedRow();
-				
-				/**
-				 * Declares and initialises categoryName as the value found in the selected row and column.
-				 */
-				String categoryName = viewPlayerTableDisplaySkills.getModel().getValueAt(row, column).toString();
-				
-				/**
-				 * Declares and initialises msgContainer as the value returned from the method in the controller called getSkillCategoryNote.
-				 * This method is used to return the value of the skill category note.
-				 */
-				String msgContainer = simplyRugbyController.getSkillCategoryNote(currentPlayer, categoryName);
-				
-				/**
-				 * Declares and initialises the msg JTextArea. This variable stores a JTextArea that contains the value obtained from the controller.
-				 */
-				JTextArea msg = new JTextArea(msgContainer);
-				msg.setLineWrap(true);
-				msg.setWrapStyleWord(true);
-				msg.setEditable(false);
-				/**
-				 * Declares and Initialises the MsgScrollPane that is used to display the category note in a scrollable text araa.
-				 */
-				JScrollPane MsgScrollPane = new JScrollPane(msg);
-				JOptionPane.showMessageDialog(null, MsgScrollPane);
+				try {
+					
+					/**
+					 * Declares and Initialises the column variable that is used to store the index of the column that information is to be read from.
+					 */
+					int column = 0;
+					
+					/**
+					 * Declares and Initialises the row variable that is used to store the value of the selected row.
+					 */
+					int row = viewPlayerTableDisplaySkills.getSelectedRow();
+					
+					/**
+					 * Declares and initialises categoryName as the value found in the selected row and column.
+					 */
+					String categoryName = viewPlayerTableDisplaySkills.getModel().getValueAt(row, column).toString();
+					
+					/**
+					 * Declares and initialises msgContainer as the value returned from the method in the controller called getSkillCategoryNote.
+					 * This method is used to return the value of the skill category note.
+					 */
+					String msgContainer = simplyRugbyController.getSkillCategoryNote(currentPlayer, categoryName);
+					
+					/**
+					 * Declares and initialises the msg JTextArea. This variable stores a JTextArea that contains the value obtained from the controller.
+					 */
+					JTextArea msg = new JTextArea(msgContainer);
+					msg.setLineWrap(true);
+					msg.setWrapStyleWord(true);
+					msg.setEditable(false);
+					/**
+					 * Declares and Initialises the MsgScrollPane that is used to display the category note in a scrollable text araa.
+					 */
+					JScrollPane MsgScrollPane = new JScrollPane(msg);
+					JOptionPane.showMessageDialog(null, MsgScrollPane);
+				} catch (ArrayIndexOutOfBoundsException oobEx)
+				{
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't selected a category to view the note of. \n Please select a category from the table and try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		viewPlayerBtnViewNotes.setFont(new Font("Times New Roman", Font.PLAIN, 13));

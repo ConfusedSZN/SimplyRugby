@@ -176,7 +176,7 @@ public class ProfileScreen extends JFrame {
 		 */
 		JLabel profileLblHeader = new JLabel(currentUser.getFirstName() + "'s Profile");
 		profileLblHeader.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		profileLblHeader.setBounds(10, 8, 155, 31);
+		profileLblHeader.setBounds(6, 11, 430, 31);
 		contentPane.add(profileLblHeader);
 		
 		/**
@@ -300,7 +300,7 @@ public class ProfileScreen extends JFrame {
 					{
 						JOptionPane.showMessageDialog(contentPane, "Yay! Your new password has been saved!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
 					} else {
-						JOptionPane.showMessageDialog(contentPane, "Oh no! It appears that an error has occured. Please try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(contentPane, "Oh no! You have entered your current password incorrectly. Please try again.", "Alert!", JOptionPane.ERROR_MESSAGE);
 					}
 					
 				} else
@@ -310,7 +310,7 @@ public class ProfileScreen extends JFrame {
 			}
 		});
 		btnChangePassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnChangePassword.setBounds(387, 306, 124, 31);
+		btnChangePassword.setBounds(348, 306, 202, 31);
 		contentPane.add(btnChangePassword);
 		
 		/**

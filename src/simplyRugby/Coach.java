@@ -21,11 +21,11 @@ package simplyRugby;
  */
 import java.util.Date;
 
-/*
+/**
+ * <p>
  * Coach class that is used as a blueprint for creating and storing information about Coaches within the club.
  * This class extends from the Member class.
  */
-
 public class Coach extends Member{
 	
 	/**

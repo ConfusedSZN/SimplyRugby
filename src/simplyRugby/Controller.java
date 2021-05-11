@@ -106,7 +106,7 @@ public class Controller {
 	 * <br>
 	 * This method is used during startup and is also used in the logout method.
 	 */
-	public void displayLogin()
+	protected void displayLogin()
 	{
 		/**
 		 * Declares loginScreen that holds an instance of the LoginScreen.
@@ -133,7 +133,7 @@ public class Controller {
 	 * <br>
 	 * For example when the "Return to Menu" button is clicked.
 	 */
-	public void displayMenu(Coach coach)
+	protected void displayMenu(Coach coach)
 	{
 		/**
 		 * Declares menuScreen that holds an instance of the MenuScreen.
@@ -164,7 +164,7 @@ public class Controller {
 	 * This allows data reading straight from the Coach Object and function calling from the controller.
 	 * 
 	 */
-	public void displayProfile(Coach coach)
+	protected void displayProfile(Coach coach)
 	{
 		/**
 		 * Declares profileScreen that holds an instance of the ProfileScreen.
@@ -177,8 +177,7 @@ public class Controller {
 		 * The view is then set to visible.
 		 */
 		profileScreen = new ProfileScreen(coach, this);
-		profileScreen.setVisible(true);
-		
+		profileScreen.setVisible(true);	
 	}
 	
 	/**
@@ -196,7 +195,7 @@ public class Controller {
 	 * In this page, the data from the squad will be displayed. For that reason we make the process simple, by parameter passing the squad object.
 	 */
 	
-	public void displaySquadView(Coach coach)
+	protected void displaySquadView(Coach coach)
 	{
 		/**
 		 * Declares squadViewScreen that holds an instance of the ViewSquadScreen.
@@ -234,7 +233,7 @@ public class Controller {
 	 * Once this information is found it is passed to the view constructor.
 	 * 
 	 */
-	public void displayViewPlayer(Coach coach, String playerMemberID)
+	protected void displayViewPlayer(Coach coach, String playerMemberID)
 	{
 		
 		/**
@@ -271,7 +270,7 @@ public class Controller {
 	 * 
 	 */
 	
-	public void displayEditPlayer(Coach coach, Player player)
+	protected void displayEditPlayer(Coach coach, Player player)
 	{
 		
 		/**
@@ -303,7 +302,7 @@ public class Controller {
 	 * If the data is saved successfully the function will return true.
 	 */
 	
-	public boolean requestSave()
+	protected boolean requestSave()
 	{
 		/**
 		 * <p>
@@ -332,7 +331,7 @@ public class Controller {
 	 * 
 	 */
 	
-	public boolean authenticateUser(String username, String password)
+	protected boolean authenticateUser(String username, String password)
 	{
 		/**
 		 * retVal holds the value that will be returned to where the method was called from.
@@ -403,7 +402,7 @@ public class Controller {
 	 * Once the new password has been set, a save is forced and retVal is set to true, this will display a success message to the user upon return to the view.
 	 */
 	
-	public boolean changePassword(String currentPassword, String newPassword, Coach currentUser)
+	protected boolean changePassword(String currentPassword, String newPassword, Coach currentUser)
 	{
 		/**
 		 * Declares retVal and sets it's value to false, meaning if the password cannot be updated due to the currentPassword being incorrect.
@@ -440,7 +439,7 @@ public class Controller {
 	 * <br>
 	 * Once it has been found, the loop breaks and the squad is returned.
 	 */
-	public Squad findSquad(Coach currentUser)
+	protected Squad findSquad(Coach currentUser)
 	{
 		/**
 		 * Declaring the currentSquad variable.
@@ -501,7 +500,7 @@ public class Controller {
 	 * The player object is then returned.
 	 */
 	
-	public Player findSpecificPlayerInformation(String playerMemberID, Squad squad)
+	protected Player findSpecificPlayerInformation(String playerMemberID, Squad squad)
 	{
 		
 		/**
@@ -576,7 +575,7 @@ public class Controller {
 	 *<br>
 	 *Once this process has complete, the value is returned.
 	 */
-	public ArrayList<String> findAllPlayerSkills(Player playerObj)
+	protected ArrayList<String> findAllPlayerSkills(Player playerObj)
 	{
 		
 		/**
@@ -635,7 +634,7 @@ public class Controller {
 	 * <br>
 	 * Once all players have been added to the model, the model will be returned as retVal.
 	 */
-	public DefaultTableModel displaySquadPlayers(Squad squadObj)
+	protected DefaultTableModel displaySquadPlayers(Squad squadObj)
 	{
 		/**
 		 * Declares and Initialises the currentSquad variable, that stores the passed in value, squadObj.
@@ -721,7 +720,7 @@ public class Controller {
 			/**
 			 * Calculates the average of the players skills and outputs them as the overallSkill variable to be displayed in the model.
 			 */
-	
+			
 			overallSkill = overallSkill / skillCount;
 			
 			/**
@@ -764,7 +763,7 @@ public class Controller {
 	 * Once complete the retVal model is returned.
 	 */
 	
-	public DefaultTableModel displayPlayerSkills(Player playerObj)
+	protected DefaultTableModel displayPlayerSkills(Player playerObj)
 	{
 		
 		/**
@@ -855,7 +854,7 @@ public class Controller {
 	 * retVal is then returned.
 	 */
 	
-	public String getSkillCategoryNote(Player playerObj, String categoryName)
+	protected String getSkillCategoryNote(Player playerObj, String categoryName)
 	{
 		/**
 		 * Declares and Initialises the Player variable currentPlayer that will store the passed in playerObj variable.
@@ -918,7 +917,7 @@ public class Controller {
 	 * <br>
 	 * retVal will then be returned to the view.
 	 */
-	public boolean addSkillCategory(Player playerObj, String categoryName, String categoryNote)
+	protected boolean addSkillCategory(Player playerObj, String categoryName, String categoryNote)
 	{
 		
 		/**
@@ -1094,7 +1093,8 @@ public class Controller {
 						/*
 						 * if the skill name is a duplicate retVal is set to false and the loop breaks, allowing for the next check to take place.
 						 */
-						if (s.getSkillName().toLowerCase().equals(newName))
+						
+						if (s.getSkillName().toLowerCase().equals(newName.toLowerCase()))
 						{
 							retVal = false;
 							break;
@@ -1108,9 +1108,9 @@ public class Controller {
 					 */
 					if (retVal == false)
 					{
-						
 					} else 
 					{
+						
 						currentSkillList.add(newSkill);
 						
 						retVal = true;
@@ -1152,7 +1152,7 @@ public class Controller {
 	 * RetVal is then returned to the view for success message or error message handling.
 	 */
 	
-	public boolean editCategoryNote(Player playerObj, String categoryName, String newValue)
+	protected boolean editCategoryNote(Player playerObj, String categoryName, String newValue)
 	{
 		
 		/**
@@ -1224,7 +1224,7 @@ public class Controller {
 	 * retVal then returns true that will prompt a success message on the view.
 	 */
 	
-	public boolean editSkillRating(Player playerObj, String categoryName, String skillName, int newValueInput)
+	protected boolean editSkillRating(Player playerObj, String categoryName, String skillName, int newValueInput)
 	{
 		
 		/**

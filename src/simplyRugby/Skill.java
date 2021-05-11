@@ -11,7 +11,7 @@ package simplyRugby;
  * @version 1.0
  */
 
-/*
+/**
  * Skill class that is used as a blueprint for creating and storing skills of players within the club.
  * Implements Java.IO.Serializable to allow for data saving to local files.
  */

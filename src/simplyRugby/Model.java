@@ -164,72 +164,6 @@ public class Model {
 		/**
 		 * Data prepopulation for skills
 		 */
-		ArrayList<Skill> skillList1 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList2 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList3 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList4 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList5 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList6 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList7 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList8 = new ArrayList<Skill>();
-		ArrayList<Skill> skillList9 = new ArrayList<Skill>();
-		
-		Skill Skill1 = new Skill("Speed", 33);
-		Skill Skill2 = new Skill("Stamina", 56);
-		Skill Skill3 = new Skill("Tackling", 77);
-		
-		Skill Skill4 = new Skill("Decision Making", 66);
-		Skill Skill5 = new Skill("Support Play", 60);
-		Skill Skill6 = new Skill("Positioning", 88);
-
-		Skill Skill7 = new Skill("Place Kick", 99);
-		Skill Skill8 = new Skill("Spiral Punt", 78);
-		Skill Skill9 = new Skill("End-over-end Kick", 44);
-		
-		skillList1.add(Skill1);
-		skillList2.add(Skill4);
-		skillList3.add(Skill7);
-		
-		skillList4.add(Skill2);
-		skillList5.add(Skill5);
-		skillList6.add(Skill8);
-		
-		skillList7.add(Skill3);
-		skillList8.add(Skill6);
-		skillList9.add(Skill9);
-		
-		/**
-		 * Data prepopulation for skill categories
-		 */
-		
-		ArrayList<SkillCategory> categoryList1 = new ArrayList<SkillCategory>();
-		ArrayList<SkillCategory> categoryList2 = new ArrayList<SkillCategory>();
-		ArrayList<SkillCategory> categoryList3 = new ArrayList<SkillCategory>();
-
-		SkillCategory Category1 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList1);
-		SkillCategory Category2 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList2);
-		SkillCategory Category3 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList3);
-		
-		SkillCategory Category4 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList4);
-		SkillCategory Category5 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList5);
-		SkillCategory Category6 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList6);
-		
-		SkillCategory Category7 = new SkillCategory("Physical", "Skills to do with Physical attributes.", skillList7);
-		SkillCategory Category8 = new SkillCategory("Mental", "Skills to do with Mental activities.", skillList8);
-		SkillCategory Category9 = new SkillCategory("Kicking", "Skills to do with Kicking the ball.", skillList9);
-	
-		categoryList1.add(Category1);
-		categoryList1.add(Category2);
-		categoryList1.add(Category3);
-		
-		categoryList2.add(Category4);
-		categoryList2.add(Category5);
-		categoryList2.add(Category6);
-		
-		categoryList3.add(Category7);
-		categoryList3.add(Category8);
-		categoryList3.add(Category9);
-		
 
 		/**
 		 * Squad 1 Category Skill Lists
@@ -350,10 +284,10 @@ public class Model {
 		
 		SkillCategory player0StengthSkillsList = new SkillCategory("Physical", "Skills to do with Physical attributes.", player0PhysicalSkillList);
 		SkillCategory player0MentalSkillsList = new SkillCategory("Mental", "Skills to do with Mental attributes.", player0MentalSkillList);
-		SkillCategory player0AttackSkillsList = new SkillCategory("Attack", "Skills to do with Attack Drills.", player0PhysicalSkillList);
-		SkillCategory player0DefenceSkillsList = new SkillCategory("Defence", "Skills to do with Defence Drills..", player0PhysicalSkillList);
-		SkillCategory player0KickingSkillsList = new SkillCategory("Kicking", "Skills to do with Kicking Drills.", player0PhysicalSkillList);
-		SkillCategory player0ContactSkillsList = new SkillCategory("Contact", "Skills to do with Contact Drills.", player0PhysicalSkillList);
+		SkillCategory player0AttackSkillsList = new SkillCategory("Attack", "Skills to do with Attack Drills.", player0AttackSkillList);
+		SkillCategory player0DefenceSkillsList = new SkillCategory("Defence", "Skills to do with Defence Drills..", player0DefenceSkillList);
+		SkillCategory player0KickingSkillsList = new SkillCategory("Kicking", "Skills to do with Kicking Drills.", player0KickingSkillList);
+		SkillCategory player0ContactSkillsList = new SkillCategory("Contact", "Skills to do with Contact Drills.", player0ContactSkillList);
 		
 		player0SkillCategoryList.add(player0StengthSkillsList); player0SkillCategoryList.add(player0MentalSkillsList); player0SkillCategoryList.add(player0AttackSkillsList);
 		player0SkillCategoryList.add(player0DefenceSkillsList); player0SkillCategoryList.add(player0KickingSkillsList); player0SkillCategoryList.add(player0ContactSkillsList);
@@ -2136,6 +2070,16 @@ public class Model {
 		player35DefenceSkillList.add(player35DefenceSkill1); player35DefenceSkillList.add(player35DefenceSkill2); player35DefenceSkillList.add(player35DefenceSkill3);
 		player35KickingSkillList.add(player35KickingSkill1); player35KickingSkillList.add(player35KickingSkill2); player35KickingSkillList.add(player35KickingSkill3);
 		player35ContactSkillList.add(player35ContactSkill1); player35ContactSkillList.add(player35ContactSkill2); player35ContactSkillList.add(player35ContactSkill3);
+		
+		SkillCategory player35StengthSkillsList = new SkillCategory("Physical", "Skills to do with Physical attributes.", player35PhysicalSkillList);
+		SkillCategory player35MentalSkillsList = new SkillCategory("Mental", "Skills to do with Mental attributes.", player35MentalSkillList);
+		SkillCategory player35AttackSkillsList = new SkillCategory("Attack", "Skills to do with Attack Drills.", player35AttackSkillList);
+		SkillCategory player35DefenceSkillsList = new SkillCategory("Defence", "Skills to do with Defence Drills..", player35DefenceSkillList);
+		SkillCategory player35KickingSkillsList = new SkillCategory("Kicking", "Skills to do with Kicking Drills.", player35KickingSkillList);
+		SkillCategory player35ContactSkillsList = new SkillCategory("Contact", "Skills to do with Contact Drills.", player35ContactSkillList);
+		
+		player35SkillCategoryList.add(player35StengthSkillsList); player35SkillCategoryList.add(player35MentalSkillsList); player35SkillCategoryList.add(player35AttackSkillsList);
+		player35SkillCategoryList.add(player35DefenceSkillsList); player35SkillCategoryList.add(player35KickingSkillsList); player35SkillCategoryList.add(player35ContactSkillsList);
 		
 		/**
 		 * Player 36

@@ -225,15 +225,25 @@ public class ViewSquadScreen extends JFrame {
 		viewSquadBtnViewSelectedPlayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int column = 0;
-				
-				int row = viewSquadTablePlayerData.getSelectedRow();
-				
-				String playerID = viewSquadTablePlayerData.getModel().getValueAt(row, column).toString();
+				/**
+				 * Try catch to catch ArrayIndexOutOfBoundsException that comes from the user clicking the button before selecting a value from the table.
+				 */
+				try {
 					
-				simplyRugbyController.displayViewPlayer(currentUser, playerID);
-				
-				dispose();
+					int column = 0;
+					
+					int row = viewSquadTablePlayerData.getSelectedRow();
+					
+					String playerID = viewSquadTablePlayerData.getModel().getValueAt(row, column).toString();
+						
+					simplyRugbyController.displayViewPlayer(currentUser, playerID);
+					
+					dispose();
+					
+				} catch (ArrayIndexOutOfBoundsException oobEx)
+				{
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't selected a player to view. \n Please select a player from the table and try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		viewSquadBtnViewSelectedPlayer.setFont(new Font("Tahoma", Font.PLAIN, 13));

@@ -246,13 +246,13 @@ public class EditPlayerScreen extends JFrame {
 		editPlayerComboBoxPlayerPosition.setModel(new DefaultComboBoxModel(new String[] {"Loose Head Prop", "Hooker", "Tight Head Prop", "Left Lock", "Right Lock",
 				"Blind Side Flanker", "Open Side Flanker", "Number 8", "Scrum Half", "Stand Off", "Left Wing", "Inside Centre", "Outside Centre", "Right Wing", "Full Back"}));
 		switch(currentPlayer.getPosition()) {
-		  case "Loosehead Prop":
+		  case "Loose Head Prop":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(0);
 		    break;
 		  case "Hooker":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(1);
 		    break;
-		  case "Tighthead Prop":
+		  case "Tight Head Prop":
 			  editPlayerComboBoxPlayerPosition.setSelectedIndex(2);
 		    break;
 		  case "Left Lock":
@@ -436,9 +436,12 @@ public class EditPlayerScreen extends JFrame {
 		contentPane.add(editPlayerBtnAddSkillToCategory);
 		
 		/**
+		 * 
 		 * Declares and Initialises the editPlayerBtnAddSkillToCategory button that is populated with the value "Edit Skill Rating".
 		 * This button is responsible for the allowing the coach to edit skill ratings.
-		 * The first action taken place by the button upon event start is Declaring and Initialising the Column and Row Variables. 
+		 * The first action taken place by the button upon event start is opening a try catch block, this allows for error handling with the action.
+		 * 
+		 * The Column and Row Variables are Declared and Initialised. 
 		 * The Column variable can be hard coded as the data we are looking for will be in that column every time.
 		 * The Row Variable is set by getting index of the selected row from within the table.
 		 * The String skillRatingString variable is then declared and initialised to the value of the skill rating within the table.
@@ -448,16 +451,13 @@ public class EditPlayerScreen extends JFrame {
 		 * The String skillCategoryName variable is then declared and initialised to the value of the skill category name within the table.
 		 * 
 		 * The action will then prompt an input from the user requesting the new value of the rating. This is input via a string and is stored in the new stringNewRatingValue variable.
-		 * 
-		 * Once this data has been obtained, a try catch is opened, this allows the rating input part of the action to catch errors as encountered and output error messages
-		 * that will match the issue that has been found.
-		 * 
-		 * The first action within the try catch is attempting to parse the stringNewRatingValue from a string to an integer, during this process multiple issues can occur
+		 * Any errors with getting the input will be caught as part of the try catch. The try catch is attempting to parse the stringNewRatingValue from a string to an integer, during this process multiple issues can occur
 		 * so multiple catches have been added to catch potential errors, these catches have custom error messages that they will output to the user that will tell them what
 		 * they have done wrong.
 		 * Catches are in place for Number format Exceptions, these Exceptions occur when a character that is not a number is passed into the parse method, 
-		 * NullPointerException, which is an error that occurs when an input is empty, and otherEx which is in place to catch any other errors that may occur.
-		 * 
+		 * NullPointerException, which is an error that occurs when an input is empty, ArrayIndexOutOfBoundsException which is used to catch errors when the user does not select a row
+		 * and otherEx which is in place to catch any other errors that may occur.
+		 *
 		 * If the input parses successfully is will be checked to see if it is within the correct range of numbers, which is 0 - 100.
 		 * If the number fits into this criteria, the boolean retVal will request the editSkillRating method to be run via the controller, the view will also
 		 * pass in the information required for this method to take place.
@@ -470,30 +470,30 @@ public class EditPlayerScreen extends JFrame {
 		JButton editPlayerBtnEditSkillRating = new JButton("Edit Skill Rating");
 		editPlayerBtnEditSkillRating.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				int column = 2;
-				
-				int row = editPlayerTableSkillData.getSelectedRow();
-				
-				String skillRatingString = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
-				
-				column = 1;
-				
-				String skillName = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
-				
-				column = 0;
-				
-				String skillCategoryName = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
 
-				JFrame popup;
-				
-				popup = new JFrame(); 
-				
-				String stringNewRatingValue = null;
-				
-				stringNewRatingValue = JOptionPane.showInputDialog(popup, "Please enter the new value for the " + skillName + " skill.", skillRatingString);
-				
 				try {
+					
+					int column = 2;
+					
+					int row = editPlayerTableSkillData.getSelectedRow();
+					
+					String skillRatingString = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+					
+					column = 1;
+					
+					String skillName = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+					
+					column = 0;
+					
+					String skillCategoryName = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+
+					JFrame popup;
+					
+					popup = new JFrame(); 
+					
+					String stringNewRatingValue = null;
+					
+					stringNewRatingValue = JOptionPane.showInputDialog(popup, "Please enter the new value for the " + skillName + " skill.", skillRatingString);
 					
 					int newRatingValue = Integer.parseInt(stringNewRatingValue);
 					
@@ -524,15 +524,15 @@ public class EditPlayerScreen extends JFrame {
 				} catch (NullPointerException nullEx)
 				{
 					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't inputted an updated value. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				} catch (ArrayIndexOutOfBoundsException oobEx) {
+					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't selected a skill rating to update. \n Please select a skill from the table and try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
 				} catch (Exception otherEx){
 					JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an unexpected error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
 				}
-				
 			}
 		});
 		editPlayerBtnEditSkillRating.setBounds(28, 216, 176, 36);
 		contentPane.add(editPlayerBtnEditSkillRating);
-		
 		
 		/**
 		 * Declares and Initialises the editPlayerbtnEditCategoryNote button that is populated with the value "Edit Category Note".
@@ -560,50 +560,57 @@ public class EditPlayerScreen extends JFrame {
 		 * Once the boolean of retVal has been returned, a check will be performed on the retVal to check if it returned true or false.
 		 * If retVal is set to true, a success message will be displayed to the user.
 		 * If retVal is set to false, a error message will be displayed to the user.
+		 * 
+		 * All of the functionality is held within a try catch block. This allows for catching of errors to do with the user not selecting the category they wish to edit.
 		 */
 		JButton editPlayerbtnEditCategoryNote = new JButton("Edit Category Note");
 		editPlayerbtnEditCategoryNote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				boolean retVal = false;
-				
-				int column = 0;
-				
-				int row = editPlayerTableSkillData.getSelectedRow();
-				
-				String titleOfCategory = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
-				
-				String oldNoteValue = simplyRugbyController.getSkillCategoryNote(currentPlayer, titleOfCategory);
-				
-				String newNoteValue = null;
-				
-				JTextArea msg = new JTextArea(oldNoteValue);
-				msg.setLineWrap(true);
-				msg.setWrapStyleWord(true);
-				msg.setEditable(true);
-				JScrollPane MsgScrollPane = new JScrollPane(msg);
-				JOptionPane.showMessageDialog(null, MsgScrollPane);
-				
-				newNoteValue = msg.getText();
-				
-				if (newNoteValue.trim().isEmpty())
-			    {
-			    	JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't inputted an updated value. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
-			    } else 
-			    {
-			    	retVal = simplyRugbyController.editCategoryNote(currentPlayer, titleOfCategory, newNoteValue);
-			    	
-			    	if (retVal == true)
-			    	{
-			    		JOptionPane.showMessageDialog(contentPane, "Yay! You have updated the note value successfully.", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-			    	} else
-			    	{
-			    		JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
-			    	}
-			    }
-			}
-		});
 
+				try {
+					boolean retVal = false;
+					
+					int column = 0;
+					
+					int row = editPlayerTableSkillData.getSelectedRow();
+					
+					String titleOfCategory = editPlayerTableSkillData.getModel().getValueAt(row, column).toString();
+					
+					String oldNoteValue = simplyRugbyController.getSkillCategoryNote(currentPlayer, titleOfCategory);
+					
+					String newNoteValue = null;
+					
+					JTextArea msg = new JTextArea(oldNoteValue);
+					msg.setLineWrap(true);
+					msg.setWrapStyleWord(true);
+					msg.setEditable(true);
+					JScrollPane MsgScrollPane = new JScrollPane(msg);
+					JOptionPane.showMessageDialog(null, MsgScrollPane);
+					
+					newNoteValue = msg.getText();
+					
+					if (newNoteValue.trim().isEmpty())
+				    {
+				    	JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't inputted an updated value. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				    } else 
+				    {
+				    	retVal = simplyRugbyController.editCategoryNote(currentPlayer, titleOfCategory, newNoteValue);
+				    	
+				    	if (retVal == true)
+				    	{
+				    		JOptionPane.showMessageDialog(contentPane, "Yay! You have updated the note value successfully.", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+				    	} else
+				    	{
+				    		JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears an error has occured. \n Please try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+				    	}
+				   }
+					} catch (ArrayIndexOutOfBoundsException oobEx)
+					{
+						JOptionPane.showMessageDialog(contentPane, "Uh Oh! It appears you haven't selected a skill category to view. \n Please select a category from the table and try again.", "Alert!", JOptionPane.WARNING_MESSAGE);
+					}
+			}
+			});
+		
 		editPlayerbtnEditCategoryNote.setBounds(28, 256, 176, 36);
 		contentPane.add(editPlayerbtnEditCategoryNote);
 		

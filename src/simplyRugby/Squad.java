@@ -14,7 +14,7 @@ package simplyRugby;
  */
 import java.util.ArrayList;
 
-/*
+/**
  * Squad class that is used as a blueprint for creating and storing information about Squads within the club.
  * Implements Java.IO.Serializable to allow for data saving to local files.
  */
