@@ -305,7 +305,7 @@ public class ProfileScreen extends JFrame {
 					
 				} else
 				{
-					JOptionPane.showMessageDialog(contentPane, "Oh No! Your new passwords don't match. Make sure that you input your new password into both the New Password and Confirm Password inputs correctly. Please Try Again.", "Alert!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, "Oh No! Your new passwords don't match. Make sure that you input your new password \n into both the New Password and Confirm Password inputs correctly. Please Try Again.", "Alert!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

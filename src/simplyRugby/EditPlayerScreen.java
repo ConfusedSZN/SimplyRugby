@@ -385,7 +385,7 @@ public class EditPlayerScreen extends JFrame {
 			        "Choose a Category", JOptionPane.QUESTION_MESSAGE, null,
 			                                                                       
 			        choices, // Array of choices
-			        choices[1]); // Initial choice
+			        choices[0]); // Initial choice
 			    
 			    if (categoryInput.trim().isEmpty())
 			    {
